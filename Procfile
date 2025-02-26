@@ -1,1 +1,1 @@
-web: kibraTours.wsgi
+web: gunicorn kibraTours.wsgi
