@@ -1,29 +1,6 @@
 from django.urls import path
-from accounts.views import *
-from django.contrib.auth import views as auth_views
 from . import views
+
 urlpatterns = [
-    #User view urls with login, register, logout, and email activation.
-    path('login/', login_page, name="login"),
-    path('register/', register_page, name="register"),
-    path('logout/', user_logout, name='logout'),
-    path('activate/<email_token>/', activate_email_account, name="activate_email"),
-    
-    #Profile management urls with profile, change-password, and shipping-address
-    path('profile/<str:username>/', profile_view, name='profile'),
-    path('change-password/', change_password, name='change_password'),
-   
-    
-    #Passoword reset urls with django default view.
-    path('password_reset/', auth_views.PasswordResetView.as_view(
-        template_name='registration/password_reset_form.html'), name='password_reset'),
-
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
-        template_name='registration/password_reset_done.html'), name='password_reset_done'),
-
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
-        template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
-        
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
-        template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+    path('profile/', views.profile, name='profile'),
 ]

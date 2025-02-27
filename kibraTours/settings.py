@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [".vercel.app", '127.0.0.1']
 
-SITE_ID = 2
 
 # Application definition
 
@@ -141,24 +140,24 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # Default Django authentication
-    'allauth.account.auth_backends.AuthenticationBackend',  # Django-Allauth authentication
-]
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # Default
+    'allauth.account.auth_backends.AuthenticationBackend',  # For allauth
+)
 
 SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "APP": {
-            "client_id": "1047050631458-8ahts4k47pu5abas22vlcepfhv6abg24.apps.googleusercontent.com",   # Google Client ID from .env
-            "secret": "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",   # Google Client Secret from .env
-            "key": "",  # Leave empty unless required
+    'google': {
+        'APP': {
+            'client_id': 'YOUR_GOOGLE_CLIENT_ID',
+            'secret': 'YOUR_GOOGLE_CLIENT_SECRET',
+            'key': ''
         },
-        "SCOPE": ["profile", "email"],
-        "AUTH_PARAMS": {"access_type": "online"},
-        "REDIRECT_URI": "https://cloud.appwrite.io/v1/account/sessions/oauth2/callback/google/674342c70030f6072b3b",
-    },
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+    }
 }
-
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -171,9 +170,10 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
-LOGIN_URL = "/accounts/login/"
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
-
-SOCIALACCOUNT_AUTO_SIGNUP = True
-SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False  # Use email as the primary identifier
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Require email confirmation
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 15  # Optional: Rate limiting
+LOGIN_REDIRECT_URL = '/accounts/profile/'  # Redirect after login
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
