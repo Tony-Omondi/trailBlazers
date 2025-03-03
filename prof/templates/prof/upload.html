@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Upload Artwork - TrailBlazers{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Upload Artwork</h2>
+    <form method="post" enctype="multipart/form-data" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="auth-button">Upload</button>
+    </form>
+    <p><a href="{% url 'prof' %}">Back to Profile</a></p>
+</div>
+{% endblock %}

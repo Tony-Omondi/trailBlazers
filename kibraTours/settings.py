@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'django.contrib.sites',
     'allauth.socialaccount.providers.google',
+    'prof'
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'kibraTours.wsgi.application'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Database
@@ -150,8 +154,8 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': 'YOUR_GOOGLE_CLIENT_ID',
-            'secret': 'YOUR_GOOGLE_CLIENT_SECRET',
+            'client_id': '532809781253-39iuhvpkej6b2s3i17aqeiukrfl324el.apps.googleusercontent.com',
+            'secret': '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',
             'key': ''
         },
         'SCOPE': ['profile', 'email'],
@@ -175,5 +179,5 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False  # Use email as the primary identifier
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Require email confirmation
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 15  # Optional: Rate limiting
-LOGIN_REDIRECT_URL = '/accounts/profile/'  # Redirect after login
+LOGIN_REDIRECT_URL = '/prof/prof/'  # Redirect after login
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'

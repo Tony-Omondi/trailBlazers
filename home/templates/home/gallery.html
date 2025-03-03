@@ -194,88 +194,26 @@
 
     <section>
         <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/coolingtime_345x430_crop_center.jpg?v=1738050585" alt="Art 1">
-                <h3>Elias Bahati</h3>
-                <h4>Cooling Time</h4>
-                <p>sh.40,000.00</p>
+            {% if artworks %}
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                {% for artwork in artworks %}
+                    <div style="flex: 1 0 21%; background-color: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
+                        {% if artwork.image %}
+                            <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" style="max-width: 100%; height: auto; border-radius: 4px;">
+                        {% endif %}
+                        <h4 style="margin: 10px 0; font-size: 18px; color: #333;">{{ artwork.name }}</h4>
+                        <p style="font-size: 14px; color: #666;">{{ artwork.description }}</p>
+                        <p style="font-size: 16px; color: #333;">
+                            <strong>Price:</strong> ${{ artwork.price }}
+                        </p>
+                    </div>
+                {% endfor %}
             </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/toocha_345x430_crop_center.jpg?v=1740404826" alt="Art 2">
-                <h3>Clinton Othiambo</h3>
-                <h4>Too Ocha</h4>
-                <p>60,000.00</p>
+        {% else %}
+            <p style="font-size: 16px; color: #555;">No artworks uploaded yet.</p>
+        {% endif %}
             </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/kiberadailylife_345x430_crop_center.jpg?v=1740405741" alt="Art 3">
-                <h3>Clinton Othiambo</h3>
-                <h4>Kibera Daily Life</h4>
-                <p>50,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/therhythmwithin_345x430_crop_center.jpg?v=1737985393" alt="Art 4">
-                <h3>Meshack Otieno</h3>
-                <h4>The Rhythm Within</h4>
-                <p>15,000.00</p>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/darknight-faithamanda_1_345x430_crop_center.jpg?v=1737720279" alt="Art 1">
-                <h3>Faith Amanda</h3>
-                <h4>Dark Night</h4>
-                <p>15,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/onetoomanyfruits_345x430_crop_center.jpg?v=1737608884" alt="Art 2">
-                <h3>Andrew Wabasha</h3>
-                <h4>Fruits</h4>
-                <p>20,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/maneatmansociety_345x430_crop_center.jpg?v=1736776796" alt="Art 3">
-                <h3>Syimon Kibe</h3>
-                <h4>Man Eat Man Society</h4>
-                <p>18,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/nairobiuprising_345x430_crop_center.jpg?v=1736775103" alt="Art 4">
-                <h3>Stephen Ndothya</h3>
-                <h4>Nairobi Uprising</h4>
-                <p>22,000.00</p>
-            </div>
-        </div>
-    </section>
-     <section>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/nightlife_345x430_crop_center.jpg?v=1737878822" alt="Art 1">
-                <h3>Faith Amanda</h3>
-                <h4>NightLife</h4>
-                <p>25,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/insafehands-wesleyosoroandandrewwabacha_1_345x430_crop_center.jpg?v=1737720692" alt="Art 2">
-                <h3>wesley & Andrew</h3>
-                <h4>In Safe Hands</h4>
-                <p>45,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/unforgotten-brianocholla_1_345x430_crop_center.jpg?v=1737719169" alt="Art 3">
-                <h3>Brian Ocholla</h3>
-                <h4>Unforgotten</h4>
-                <p>50,000.00</p>
-            </div>
-            <div class="grid-item">
-                <img src="https://uwezashop.com/cdn/shop/files/vividharmony_345x430_crop_center.jpg?v=1737790507" alt="Art 4">
-                <h3>Paul Alex</h3>
-                <h4>Vivid Harmony</h4>
-                <p>18,000.00</p>
-            </div>
-        </div>
-    </section>
+
 </body>
 {% endblock %}
 
