@@ -9,6 +9,7 @@
   <!-- Load CSS from static files -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   
+  
 </head>
 <body>
 
@@ -24,6 +25,15 @@
         <span class="navbar-toggler-bar"></span>
       </button>
       <a class="navbar-brand" href="{% url 'home' %}">
+        {% if user.is_authenticated %}
+                <span class="artist-name">{{ user.email }}</span>
+                <a href="{% url 'prof' %}">Profile</a>
+                <a href="{% url 'upload_artwork' %}">upload_artwork</a>
+                <a href="{% url 'account_logout' %}" class="logout-button">Logout</a>
+            {% else %}
+                <a href="{% url 'account_login' %}">Login</a>
+                <a href="{% url 'account_signup' %}">Sign Up</a>
+            {% endif %}
         <i class="fa fa-home"></i>
       </a>
     </div>
@@ -42,7 +52,7 @@
           <a class="nav-link" href="{% url 'map' %}" onclick="changePage('map')">Map</a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'map' %}" onclick="changePage('login')" class="btn btn-danger btn-round">Login</a>
+          <a href="{% url 'account_signup' %}" onclick="changePage('login')" class="btn btn-danger btn-round">Login</a>
         </li>
       </ul>
     </div>

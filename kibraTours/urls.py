@@ -19,7 +19,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin site
+    path('accounts/', include('allauth.urls')),  # Handles Google login
+    path('accounts/', include('accounts.urls')),  # Your custom accounts URLs
+    path('profile/', include('prof.urls')),
     path('', include('home.urls')),  # App-level URLs
-    path('accounts/', include('allauth.urls')),
+    
+    
     
 ]

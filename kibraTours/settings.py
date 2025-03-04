@@ -29,7 +29,11 @@ SECRET_KEY = 'django-insecure-+ef2j$q*a+aibwwh-u7v3x&tg6!=%-@j55iyd4^!o!tkch_g9h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ["whatsup8.herokuapp.com"]
+=======
+ALLOWED_HOSTS = [".vercel.app", '127.0.0.1']
+>>>>>>> b708c1804d58973abcbeac835a8a030bbd6a8608
 
 
 # Application definition
@@ -45,6 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'accounts',
+    'django.contrib.sites',
+    'allauth.socialaccount.providers.google',
+    'prof'
 ]
 
 MIDDLEWARE = [
@@ -78,6 +86,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'kibraTours.wsgi.application'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Database
@@ -142,11 +153,25 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend'
+SITE_ID = 1
 
-]
-SOCIALACCOUNT_PROVIDERS = {}
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # Default
+    'allauth.account.auth_backends.AuthenticationBackend',  # For allauth
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '532809781253-39iuhvpkej6b2s3i17aqeiukrfl324el.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+    }
+}
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -158,6 +183,16 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
+<<<<<<< HEAD
 import django_heroku
 
 django_heroku.settings(locals())
+=======
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False  # Use email as the primary identifier
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Require email confirmation
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 15  # Optional: Rate limiting
+LOGIN_REDIRECT_URL = '/prof/prof/'  # Redirect after login
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+>>>>>>> b708c1804d58973abcbeac835a8a030bbd6a8608
