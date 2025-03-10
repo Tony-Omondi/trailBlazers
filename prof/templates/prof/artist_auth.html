@@ -1,112 +1,44 @@
-{% extends 'base.html' %}
 {% load static %}
-{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Authentication</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
 
-{% block title %}KibraConnect - {% if mode == 'signup' %}Artist Sign Up{% else %}Artist Log In{% endif %}{% endblock %}
+    <div class="auth-container">
+        <h2>{{ "Login" if mode == "login" else "Sign Up" }}</h2>
 
-{% block content %}
-<div class="auth-wrapper">
-    <section class="auth-section">
-        <h1>{% if mode == 'signup' %}Artist Sign Up{% else %}Artist Log In{% endif %}</h1>
         {% if messages %}
-            {% for message in messages %}
-                <div class="error-message">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-        <form method="post" action="{% url 'prof:artist_auth' %}?mode={{ mode }}">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <div class="error-message">{{ error }}</div>
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
                 {% endfor %}
-            {% endif %}
-            {% for field in form %}
-                <div class="inputbox">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.errors %}
-                        {% for error in field.errors %}
-                            <div class="error-message">{{ error }}</div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            {% endfor %}
-            {% if mode == 'signup' %}
-                <button type="submit" name="signup">Sign Up as Artist</button>
-            {% else %}
-                <button type="submit" name="login">Log In as Artist</button>
-            {% endif %}
-        </form>
-        {% if mode == 'signup' %}
-            <p>Already an artist? <a href="{% url 'prof:artist_auth' %}?mode=login">Log In</a></p>
-        {% else %}
-            <p>Not an artist? Sign up <a href="{% url 'prof:artist_auth' %}?mode=signup">here</a></p>
+            </ul>
         {% endif %}
-        <div class="social-login">
-            <a href="{% provider_login_url 'google' %}" class="social-button">Continue with Google</a>
-        </div>
-    </section>
-</div>
-{% endblock %}
 
-{% block extra_css %}
-<style>
-    .auth-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-image: url('https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg');
-        background-size: cover;
-        background-position: center;
-    }
-    .auth-section {
-        max-width: 400px;
-        padding: 2rem;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        backdrop-filter: blur(10px);
-        text-align: center;
-    }
-    .inputbox {
-        margin: 15px 0;
-    }
-    .inputbox label {
-        color: #fff;
-        display: block;
-    }
-    .inputbox input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #fff;
-        border-radius: 5px;
-        background: transparent;
-        color: #fff;
-    }
-    button {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background: #fff;
-        cursor: pointer;
-    }
-    .social-button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-        background: #4285f4;
-        color: #fff;
-        text-align: center;
-        text-decoration: none;
-    }
-    .social-button:hover {
-        background: #357abd;
-    }
-    .error-message {
-        color: #ff4444;
-    }
-</style>
-{% endblock %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{{ "Login" if mode == "login" else "Sign Up" }}</button>
+        </form>
+
+        <p>
+            {% if mode == "login" %}
+                Don't have an account? <a href="{% url 'prof:artist_auth' %}?mode=signup">Sign up here</a>.
+            {% else %}
+                Already have an account? <a href="{% url 'prof:artist_auth' %}?mode=login">Login here</a>.
+            {% endif %}
+        </p>
+
+        <hr>
+        <a href="{% provider_login_url 'google' %}?next={{ request.GET.next|default:'/' }}">
+            <button class="google-login">Login with Google</button>
+        </a>
+    </div>
+
+</body>
+</html>
