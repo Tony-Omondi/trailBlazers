@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KibraConnect - Artist Login{% endblock %}
+
+{% block content %}
+<div id="content-wrapper">
+    <div class="auth-wrapper">
+        <section class="auth-section">
+            <h1>Artist Login</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="inputbox">
+                    <label for="login">Email:</label>
+                    <input type="email" name="login" id="login" required>
+                </div>
+                <div class="inputbox">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button type="submit">Login as Artist</button>
+            </form>
+            <p><a href="{% url 'auth' %}?mode=login">Back to General Login</a></p>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Same CSS as auth.html */
+</style>
+{% endblock %}

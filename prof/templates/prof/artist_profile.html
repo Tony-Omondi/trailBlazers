@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="auth-wrapper">
+    <section class="auth-section">
+        <h1>{{ artist_profile.full_name }}'s Profile</h1>
+        {% if artist_profile.profile_picture %}
+            <img src="{{ artist_profile.profile_picture.url }}" alt="Profile Picture">
+        {% endif %}
+        <p>Bio: {{ artist_profile.bio }}</p>
+        <h2>Artworks</h2>
+        {% for artwork in artworks %}
+            <div>
+                <h3>{{ artwork.title }}</h3>
+                <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}">
+                <p>{{ artwork.description }}</p>
+                <p>Price: {{ artwork.price }}</p>
+            </div>
+        {% empty %}
+            <p>No artworks yet.</p>
+        {% endfor %}
+        <a href="{% url 'prof:edit_artist_profile' %}">Edit Profile</a>
+        <a href="{% url 'prof:upload_artwork' %}">Upload Artwork</a>
+    </section>
+</div>
+{% endblock %}

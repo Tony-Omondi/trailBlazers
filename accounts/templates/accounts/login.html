@@ -1,10 +1,94 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KibraConnect - Login{% endblock %}
+
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<p><a href="{% provider_login_url 'google' %}">Login with Google</a></p>
+<div id="content-wrapper">
+    <div class="auth-wrapper">
+        <section class="auth-section">
+            <form action="{% url 'auth' %}?mode=login" method="get">
+                <h1>Login</h1>
+                <p>An error occurred during login. Please try again.</p>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="error" style="color: #ff4444; font-size: 0.9rem; margin-bottom: 1rem;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <button type="submit">Back to Login</button>
+            </form>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+    .auth-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+        background-image: url('https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+    }
+
+    .auth-section {
+        position: relative;
+        max-width: 400px;
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(55px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 3rem;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+        color: #fff;
+        margin-bottom: 1.5rem;
+    }
+
+    button {
+        width: 100%;
+        height: 40px;
+        border-radius: 40px;
+        background-color: rgb(255, 255, 255, 1);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.4s ease;
+    }
+
+    button:hover {
+        background-color: rgb(255, 255, 255, 0.5);
+    }
+
+    #content-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .auth-wrapper {
+        flex: 1;
+    }
+
+    .footer {
+        flex-shrink: 0;
+    }
+</style>
 {% endblock %}

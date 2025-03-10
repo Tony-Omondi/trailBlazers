@@ -1,40 +1,151 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Profile - TrailBlazers{% endblock %}
+{% block title %}KibraConnect - Artist Profile{% endblock %}
 
 {% block content %}
-<div style="width: 80%; margin: 20px auto; padding: 20px; background-color: #f5f5f5; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-    <h2 style="color: #333; text-align: center; margin-bottom: 20px;">Your Profile</h2>
-    <p style="font-size: 16px; color: #555;">
-        <strong>Email:</strong> {{ user.email }}
-    </p>
-    <a href="{% url 'upload_artwork' %}" 
-       style="display: inline-block; padding: 10px 15px; margin-bottom: 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 4px;">
-        Upload Artwork
-    </a>
-    <h3 style="color: #333; margin-top: 30px;">Your Artworks</h3>
-    {% if artworks %}
-        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-            {% for artwork in artworks %}
-                <div style="flex: 1 0 21%; background-color: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; text-align: center;">
-                    {% if artwork.image %}
-                        <img src="{{ artwork.image.url }}" alt="{{ artwork.name }}" style="max-width: 100%; height: auto; border-radius: 4px;">
-                    {% endif %}
-                    <h4 style="margin: 10px 0; font-size: 18px; color: #333;">{{ artwork.name }}</h4>
-                    <p style="font-size: 14px; color: #666;">{{ artwork.description }}</p>
-                    <p style="font-size: 16px; color: #333;">
-                        <strong>Price:</strong> ${{ artwork.price }}
-                    </p>
+<div id="content-wrapper">
+    <div class="auth-wrapper">
+        <section class="auth-section">
+            <h1>{{ artist_profile.full_name }}'s Profile</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% if artist_profile.profile_picture %}
+                <img src="{{ artist_profile.profile_picture.url }}" alt="Profile Picture" style="max-width: 200px; border-radius: 10px;">
+            {% else %}
+                <p>No profile picture set.</p>
+            {% endif %}
+            <p><strong>Email:</strong> {{ artist_profile.user.email }}</p>
+            <p><strong>Public Email:</strong> {{ artist_profile.email_public|default:"Not provided" }}</p>
+            <p><strong>Bio:</strong> {{ artist_profile.bio|default:"No bio set." }}</p>
+            <p><strong>Location:</strong> {{ artist_profile.location|default:"Not provided" }}</p>
+            <p><strong>Phone:</strong> {{ artist_profile.phone_number|default:"Not provided" }}</p>
+            <p><strong>Artistic Style:</strong> {{ artist_profile.get_artistic_style_display|default:"Not specified" }}</p>
+            <p><strong>LinkedIn:</strong> {% if artist_profile.linkedin_url %}<a href="{{ artist_profile.linkedin_url }}">LinkedIn</a>{% else %}Not provided{% endif %}</p>
+            <p><strong>Facebook:</strong> {% if artist_profile.facebook_url %}<a href="{{ artist_profile.facebook_url }}">Facebook</a>{% else %}Not provided{% endif %}</p>
+            <p><strong>Instagram:</strong> {% if artist_profile.instagram_url %}<a href="{{ artist_profile.instagram_url }}">Instagram</a>{% else %}Not provided{% endif %}</p>
+            <h2>Artworks</h2>
+            {% if artworks %}
+                <div class="artworks">
+                    {% for artwork in artworks %}
+                        <div class="artwork">
+                            <h3>{{ artwork.title }}</h3>
+                            <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}" style="max-width: 150px; border-radius: 5px;">
+                            <p>{{ artwork.description|default:"No description" }}</p>
+                            <p><strong>Price:</strong> KSH {{ artwork.price }}</p>
+                            <p><strong>Available:</strong> {% if artwork.is_available %}Yes{% else %}No{% endif %}</p>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p style="font-size: 16px; color: #555;">No artworks uploaded yet.</p>
-    {% endif %}
-    <a href="{% url 'account_logout' %}" 
-       style="display: inline-block; padding: 10px 15px; margin-top: 20px; background-color: #dc3545; color: #fff; text-decoration: none; border-radius: 4px;">
-        Log Out
-    </a>
+            {% else %}
+                <p>No artworks uploaded yet.</p>
+            {% endif %}
+            <a href="{% url 'prof:edit_artist_profile' %}"><button>Edit Profile</button></a>
+            <a href="{% url 'prof:upload_artwork' %}"><button>Upload Artwork</button></a>
+            <p><a href="{% url 'account_logout' %}">Logout</a></p>
+        </section>
+    </div>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+    .auth-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+        background-image: url('https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+    }
+
+    .auth-section {
+        position: relative;
+        max-width: 600px;
+        background-color: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(55px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 3rem;
+        text-align: center;
+    }
+
+    h1, h2 {
+        font-size: 2rem;
+        color: #fff;
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        color: #fff;
+        margin: 10px 0;
+    }
+
+    p {
+        color: #fff;
+        margin: 5px 0;
+    }
+
+    .artworks {
+        margin-top: 20px;
+    }
+
+    .artwork {
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    button {
+        width: 100%;
+        height: 40px;
+        border-radius: 40px;
+        background-color: rgb(255, 255, 255, 1);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.4s ease;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: rgb(255, 255, 255, 0.5);
+    }
+
+    .error-message {
+        color: #ff4444;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    #content-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .auth-wrapper {
+        flex: 1;
+    }
+
+    .footer {
+        flex-shrink: 0;
+    }
+</style>
 {% endblock %}

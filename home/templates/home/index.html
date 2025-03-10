@@ -1,586 +1,716 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}Home Page Playground{% endblock %}
+
+{% block title %}KibraConnect - Discover Kibera{% endblock %}
+
+{% block brand_name %}KibraConnect{% endblock %}
+{% block footer_brand_name %}KibraConnect{% endblock %}
 
 {% block content %}
-  <!-- Section with header and background -->
-  <div class="page-header section-dark">
-    <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-        <source src="{% static 'images/Poor Housing Settlement Kibera Kenya Nairobi Stock Footage Video.webm' %}" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    <div class="filter"></div>
-    <div class="content-center">
-        <div class="container">
-            <div class="title-brand">
-                <h1 class="presentation-title">WELCOME TO KIBRA</h1>
-                <div class="fog-low">
-                    <img src="http://demos.creative-tim.com/paper-kit-2/assets/img/fog-low.png" alt="">
-                </div>
-                <div class="fog-low right">
-                    <img src="http://demos.creative-tim.com/paper-kit-2/assets/img/fog-low.png" alt="">
+<div class="container-fluid position-relative p-0">
+    <!-- Carousel Start -->
+    <div class="header-carousel owl-carousel">
+        <div class="header-carousel-item">
+            <img src="https://lh3.googleusercontent.com/p/AF1QipNPysthS9YT8cit7AaHX0vDH6uhrRr6vo7tscs3=s680-w680-h510" class="img-fluid w-100" alt="Kibera Landscape">
+            <div class="carousel-caption">
+                <div class="container">
+                    <div class="row gy-0 gx-5">
+                        <div class="col-lg-0 col-xl-5"></div>
+                        <div class="col-xl-7 animated fadeInLeft">
+                            <div class="text-sm-center text-md-end">
+                                <h4 class="text-primary text-uppercase fw-bold mb-4">Welcome To KibraConnect</h4>
+                                <h1 class="display-4 text-uppercase text-white mb-4">Explore the Heart of Kibera</h1>
+                                <p class="mb-5 fs-5">Discover the vibrant culture, resilience, and beauty of Kibera through immersive tours and local experiences.</p>
+                                <div class="d-flex justify-content-center justify-content-md-end flex-shrink-0 mb-4">
+                                    <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#"><i class="fas fa-play-circle me-2"></i> Watch Video</a>
+                                    <a class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2" href="{% url 'about_us' %}">Book a Tour</a>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center justify-content-md-end">
+                                    <h2 class="text-white me-2">Follow Us:</h2>
+                                    <div class="d-flex justify-content-end ms-2">
+                                        <a class="btn btn-md-square btn-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-md-square btn-light rounded-circle mx-2" href=""><i class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-md-square btn-light rounded-circle mx-2" href=""><i class="fab fa-instagram"></i></a>
+                                        <a class="btn btn-md-square btn-light rounded-circle ms-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <h2 class="presentation-subtitle text-center">IF YOU MISS IT IN YOUR MIND, YOU MISS IT IN LIFE.</h2>
+        </div>
+        <div class="header-carousel-item">
+            <img src="{% static 'img/kibera-community.jpg' %}" class="img-fluid w-100" alt="Kibera Community">
+            <div class="carousel-caption">
+                <div class="container">
+                    <div class="row g-5">
+                        <div class="col-12 animated fadeInUp">
+                            <div class="text-center">
+                                <h4 class="text-primary text-uppercase fw-bold mb-4">Welcome To KibraConnect</h4>
+                                <h1 class="display-4 text-uppercase text-white mb-4">Experience Kibera’s Spirit</h1>
+                                <p class="mb-5 fs-5">Join us to connect with the local community and uncover stories of strength and creativity.</p>
+                                <div class="d-flex justify-content-center flex-shrink-0 mb-4">
+                                    <a class="btn btn-light rounded-pill py-3 px-4 px-md-5 me-2" href="#"><i class="fas fa-play-circle me-2"></i> Watch Video</a>
+                                    <a class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2" href="{% url 'tours' %}">Book a Tour</a>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <h2 class="text-white me-2">Follow Us:</h2>
+                                    <div class="d-flex justify-content-end ms-2">
+                                        <a class="btn btn-md-square btn-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a class="btn btn-md-square btn-light rounded-circle mx-2" href=""><i class="fab fa-twitter"></i></a>
+                                        <a class="btn btn-md-square btn-light rounded-circle mx-2" href=""><i class="fab fa-instagram"></i></a>
+                                        <a class="btn btn-md-square btn-light rounded-circle ms-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="moving-clouds" style="background-image: url('http://demos.creative-tim.com/paper-kit-2/assets/img/clouds.png');"></div>
-  </div>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Della+Respira&family=Golos+Text:wght@400..900&family=Poppins:wght@300;400;500;600;700&display=swap');
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
-    }
-
-    .section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    .section.dark {
-      background: #333;
-      color: #fff;
-    }
-
-    .section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      color: inherit;
-    }
-
-    .collapsible-gallery {
-      width: 100%;
-      max-width: 1265px;
-      margin: 0 auto;
-    }
-
-    .collapsible-gallery figure {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin: 0 0 30px 0;
-    }
-
-    .collapsible-gallery figure figcaption {
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: space-between;
-    }
-
-    .collapsible-gallery figure figcaption h1 {
-      font: normal normal 400 240% / 1.5cap "Della Respira", serif;
-      padding: 0 0 10px 0;
-      margin: 0 0 20px 0;
-      border-bottom: 1px solid #333;
-      text-wrap: balance;
-    }
-
-    .collapsible-gallery figure figcaption p {
-      color: #bbb;
-      padding-left: 30px;
-      margin: 0;
-      border-left: 10px solid;
-      border-image: repeating-linear-gradient(
-          43deg,
-          white,
-          white 4px,
-          transparent 5px,
-          transparent 9px,
-          white 10px
-        )
-        10;
-      text-wrap: pretty;
-    }
-
-    .collapsible-gallery figure figcaption p span:last-of-type {
-      display: none;
-    }
-
-    .collapsible-gallery button {
-      font: normal normal 400 12pt / 2cap "Golos Text", sans-serif;
-      width: 200px;
-      height: 50px;
-      background-color: transparent;
-      border: 1px solid #666;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .collapsible-gallery button::after {
-      position: absolute;
-      right: 100%;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #ccc;
-      content: "";
-      z-index: -1;
-      transition: all 0.3s ease;
-    }
-
-    .collapsible-gallery button:hover::after {
-      right: 0;
-      transition: all 0.3s ease;
-    }
-
-    .collapsible-gallery button input {
-      display: none;
-    }
-
-    .collapsible-gallery button label {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .collapsible-gallery button:hover label {
-      color: black;
-      transition: all 0.3s ease;
-    }
-
-    .collapsible-gallery button label span {
-      display: none;
-    }
-
-    .collapsible-gallery button:not(:has(input:checked)) label span:first-of-type {
-      display: initial;
-    }
-
-    .collapsible-gallery button:has(input:checked) label span:last-of-type {
-      display: initial;
-    }
-
-    .collapsible-gallery section {
-      width: 100%;
-      height: 0;
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-      justify-content: stretch;
-      border-right: 1px solid #555;
-      border-bottom: 1px solid #555;
-      border-left: 1px solid #555;
-      transition: all 0.5s ease;
-      position: relative;
-    }
-
-    .collapsible-gallery section::before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 2px;
-      background-image: linear-gradient(
-        90deg,
-        #ff00bb,
-        #ff00b6,
-        #ff00a8,
-        #ff0b93,
-        #ff347a,
-        #ff585f,
-        #ff7a44,
-        #ff9829,
-        #ffb20c,
-        #ffc500,
-        #ffd100,
-        #ffd500
-      );
-      content: "";
-      z-index: 2;
-      transition: all 1.2s ease;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section::before {
-      width: 0px;
-      transition: all 1.2s ease;
-    }
-
-    .collapsible-gallery div {
-      flex-grow: 1;
-      opacity: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: scroll;
-      transition: all 0.4s ease;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section {
-      height: 220px;
-      transition: all 0.5s ease;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div,
-    .collapsible-gallery figure:has(button input:checked)
-      ~ section
-      div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div {
-      opacity: 1;
-      flex-grow: 2;
-      transition-delay: 0.15s;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div + div,
-    .collapsible-gallery figure:has(button input:checked)
-      ~ section
-      div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div {
-      opacity: 1;
-      transition-delay: 0.3s;
-      flex-grow: 3;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div + div + div,
-    .collapsible-gallery figure:has(button input:checked)
-      ~ section
-      div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div {
-      opacity: 1;
-      transition-delay: 0.45s;
-      flex-grow: 4;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div + div + div + div,
-    .collapsible-gallery figure:has(button input:checked)
-      ~ section
-      div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div {
-      opacity: 1;
-      transition-delay: 0.6s;
-      flex-grow: 5;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div + div + div + div + div,
-    .collapsible-gallery figure:has(button input:checked)
-      ~ section
-      div
-      + div
-      + div
-      + div
-      + div
-      + div
-      + div {
-      opacity: 1;
-      transition-delay: 0.75s;
-      flex-grow: 6;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div + div + div + div + div + div {
-      opacity: 1;
-      transition-delay: 0.9s;
-      flex-grow: 7;
-    }
-
-    .collapsible-gallery section div:hover {
-      flex-grow: 2 !important;
-    }
-
-    .collapsible-gallery section:has(div:hover) div:not(:hover) {
-      flex-grow: 1 !important;
-    }
-
-    .collapsible-gallery section:has(div:hover) div {
-      transition-delay: 0s !important;
-    }
-
-    .collapsible-gallery figure:has(button input:checked) ~ section div {
-      animation: pointerFix 1.7s linear 0s 1 normal;
-    }
-
-    @keyframes pointerFix {
-      0% {
-        pointer-events: none;
-      }
-      99% {
-        pointer-events: none;
-      }
-      100% {
-        pointer-events: initial;
-      }
-    }
-
-    /* Change Gallery Images */
-    .collapsible-gallery section div:first-of-type {
-      background-image: url("{% static 'images/fashion.jpg' %}");
-    }
-
-    .collapsible-gallery section div + div {
-      background-image: url("{% static 'images/nobody.jpg' %}");
-    }
-
-    .collapsible-gallery section div + div + div {
-      background-image: url("{% static 'images/rafiki.jpg' %}");
-    }
-
-    .collapsible-gallery section div + div + div + div {
-      background-image: url("{% static 'images/kibraparade.jpg' %}");
-    }
+    <!-- Carousel End -->
+</div>
 
 
-    .collapsible-gallery section div + div + div + div + div {
-      background-image: url("{% static 'images/parade.jpg' %}");
-    }
 
-    .collapsible-gallery section div + div + div + div + div + div {
-      background-image: url("{% static 'images/backimage.jpg' %}");
-    }
 
-    @media (max-width: 900px) {
-      .collapsible-gallery figure {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .collapsible-gallery figure figcaption {
-        margin-bottom: 20px;
-      }
-      .collapsible-gallery figure figcaption p span:first-of-type {
-        display: none;
-      }
-      .collapsible-gallery figure figcaption p span:last-of-type {
-        display: initial;
-      }
-      .collapsible-gallery button {
-        width: 100%;
-        max-width: 600px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .collapsible-gallery figure figcaption {
-        max-width: unset;
-      }
-      .collapsible-gallery button {
-        max-width: unset;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .collapsible-gallery section {
-        flex-direction: column;
-      }
-      .collapsible-gallery figure:has(button input:checked) ~ section {
-        height: 1000px;
-      }
-    }
-
-    /* Grid and Card Styles */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: #E5E4E2;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .card img {
-      width: 100%;
-      height: 500px;
-      object-fit: cover;
-    }
-
-    .card .content {
-      padding: 20px;
-    }
-
-    .card .content h3 {
-      margin-top: 0;
-      font-size: 1.5rem;
-      color: #333;
-    }
-
-    .card .content p {
-      color: #666;
-      font-size: 1rem;
-    }
-
-    .subscribe {
-      background: #ff5722;
-      padding: 80px 20px;
-      text-align: center;
-      color: #fff;
-    }
-
-    .subscribe h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .subscribe input[type="email"] {
-      padding: 12px;
-      width: 300px;
-      max-width: 100%;
-      margin-right: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    .subscribe button {
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 1rem;
-      transition: background 0.3s ease;
-    }
-
-    .subscribe button:hover {
-      background: #555;
-    }
-
-    footer {
-      background: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-
-    footer a {
-      color: #ff5722;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: #e64a19;
-    }
-  </style>
-
-  <section class="section">
-    <h2>Top Art Galleries</h2>
-    <div class="collapsible-gallery">
-      <figure>
-        <figcaption>
-          <h1>Art Galleries</h1>
-          <p>
-            Explore the vibrant art scene of Kibera. Use the button <span>to the right</span> <span>below</span> to open and close the gallery. Hover over images to expand them.
-          </p>
-        </figcaption>
-        <button>
-          <label for="init">
-            <span>Expand</span>
-            <span>Collapse</span>
-          </label>
-          <input type="checkbox" name="init" id="init">
-        </button>
-      </figure>
-      <section>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </section>
+<!-- Services Start -->
+<div class="container-fluid service pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Top Attractions</h4>
+            <h1 class="display-5 mb-4">Experience Kibera’s Best</h1>
+            <p class="mb-0">From art galleries to community projects, explore the top attractions that make Kibera unique.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipNPysthS9YT8cit7AaHX0vDH6uhrRr6vo7tscs3=s680-w680-h510" class="img-fluid rounded-top w-100" alt="HOF Gallery">
+                    </div>
+                    <div class="rounded-bottom p-4">
+                        <a href="{% url 'gallery' %}" class="h4 d-inline-block mb-4">HOF Gallery Kibera</a>
+                        <p class="mb-4">A hub for social justice art, fostering collaboration and empowerment through creative expression.</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'gallery' %}">Explore Art</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://uwezakenya.org/wp-content/uploads/2019/07/uwezaartgallery.jpg" class="img-fluid rounded-top w-100" alt="Uweza Gallery">
+                    </div>
+                    <div class="rounded-bottom p-4">
+                        <a href="{% url 'gallery' %}" class="h4 d-inline-block mb-4">Uweza Art Gallery</a>
+                        <p class="mb-4">Empowering young artists with free resources, training, and a platform to showcase their work globally.</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'gallery' %}">Explore Art</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://seattleglobalist.com/wp-content/uploads/2014/06/IMG_8250-400x266.jpg"  class="img-fluid rounded-top w-100" alt="Marketplace">
+                    </div>
+                    <div class="rounded-bottom p-4">
+                        <a href="#" class="h4 d-inline-block mb-4">Kibera Marketplace</a>
+                        <p class="mb-4">Experience the bustling energy of local markets, filled with crafts, food, and vibrant commerce.</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-item">
+                    <div class="service-img">
+                      <img src="https://shieldintl.org/wp-content/uploads/2024/12/shield-dp.jpg" class="img-fluid rounded-top w-100" alt="Community Center">
+                        
+                        
+                    </div>
+                    <div class="rounded-bottom p-4">
+                        <a href="#" class="h4 d-inline-block mb-4">Community Centers</a>
+                        <p class="mb-4">Visit hubs of education and empowerment, supporting local youth and families.</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://scontent.fmba5-1.fna.fbcdn.net/v/t39.30808-6/366332797_769930181801474_7925677592172466344_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=_9LN0dKIw_0Q7kNvgESvES3&_nc_oc=AdhX1ttnNaiRouJPTPdkofNUIUaWDxtldexEJ7IiJI5xYyk6RygkHMYXtZX_vmmVQOw&_nc_zt=23&_nc_ht=scontent.fmba5-1.fna&_nc_gid=AXM-AF7aR4DKZq0h3GUuz-2&oh=00_AYBfbBY7jmC-mTNjpbEBJC0eEWStFsTGtrKU7p3l5Fxdzw&oe=67CE0711" class="img-fluid rounded-top w-100" alt="Street Art">
+                    </div>
+                    <div class="rounded-bottom p-4">
+                        <a href="#" class="h4 d-inline-block mb-4">Street Art Tour</a>
+                        <p class="mb-4">Marvel at colorful murals that tell the stories of Kibera’s past and present.</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="service-item">
+                    <div class="service-img">
+                        <img src="https://cdn.britannica.com/03/110303-050-E0314C9B/Hands-woman-tapestry-Kenyah-East-Kalimantan-Indonesia.jpg" class="img-fluid rounded-top w-100" alt="Workshops">
+                    </div>
+                    <div class="rounded-bottom p-4">
+                        <a href="#" class="h4 d-inline-block mb-4">Craft Workshops</a>
+                        <p class="mb-4">Participate in hands-on sessions with local artisans and take home unique souvenirs.</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
- <section class="section">
- <h2>Community Projects</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="{% static 'images/fashionweek.jpg' %}" alt="Kibera Fashion Week">
-        <div class="content">
-          <h3>Kibera Fashion Week</h3>
-          <p>Celebrating local talent and creativity in fashion.</p>
+</div>
+<!-- Services End -->
+
+<!-- Art Gallery Teaser Start -->
+<div class="container-fluid gallery-teaser pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Art Gallery</h4>
+            <h1 class="display-5 mb-4">Showcasing Kibera’s Artists</h1>
+            <p class="mb-0">Discover the incredible talent of Kibera’s artists, from vibrant paintings to powerful sculptures, available for you to explore and purchase.</p>
         </div>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <img src="{% static 'images/kibraParade.jpg' %}" alt="Kibra Parade">
-          <div class="content">
-            <h3>Kibera Art Parade</h3>
-<p>Celebrating the young artists and appreciating there art.</p>
-          </div>
+        <div class="row g-4">
+            {% for artwork in latest_artworks %}
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.{{ forloop.counter|add:1 }}s">
+                    <div class="gallery-item">
+                        {% if artwork.image %}
+                            <img src="{{ artwork.image.url }}" class="img-fluid rounded w-100" alt="{{ artwork.title }}">
+                        {% else %}
+                            <img src="{% static 'img/default-art.jpg' %}" class="img-fluid rounded w-100" alt="Default Art">
+                        {% endif %}
+                        <div class="p-4">
+                            <h4 class="mb-2">"{{ artwork.title }}"</h4>
+                            <p class="mb-0">By {{ artwork.artist.full_name|default:artwork.artist.user.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p class="text-muted">No artworks available yet.</p>
+                </div>
+            {% endfor %}
         </div>
-      <div class="card">
-        <img src="{% static 'images/image1.jpg' %}" alt="Shield">
-        <div class="content">
-          <h3>Shield</h3>
-          <p>Young tech enthusiasts get to learn and sharpen there skills.</p>
+        <div class="text-center mt-5">
+            <a href="{% url 'gallery' %}" class="btn btn-primary rounded-pill py-3 px-5">Visit Our Gallery</a>
         </div>
-      </div>
     </div>
-  </section>
+</div>
+<!-- Art Gallery Teaser End -->
 
-  <section class="subscribe">
-    <h2>Stay Connected with Kibera</h2>
-    <p>Subscribe to our newsletter for updates on events, projects, and more.</p>
-    <form>
-      <input type="email" placeholder="Enter your email">
-      <button>Subscribe</button>
-    </form>
-  </section>
+<!-- Features Start -->
+<div class="container-fluid feature pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Why Choose Us</h4>
+            <h1 class="display-5 mb-4">Authentic Travel Experiences</h1>
+            <p class="mb-0">We connect you with Kibera’s soul through local guides, sustainable tourism, and meaningful interactions.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="feature-item p-4">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-users fa-4x text-primary"></i>
+                    </div>
+                    <h4>Local Guides</h4>
+                    <p class="mb-4">Tours led by Kibera residents who share authentic stories and insights.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="feature-item p-4">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-leaf fa-4x text-primary"></i>
+                    </div>
+                    <h4>Sustainable Tourism</h4>
+                    <p class="mb-4">Supporting the community with every booking, ensuring a positive impact.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="feature-item p-4">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-camera fa-4x text-primary"></i>
+                    </div>
+                    <h4>Photo Opportunities</h4>
+                    <p class="mb-4">Capture the vibrant life and landscapes of Kibera with guided photography stops.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="feature-item p-4">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="fas fa-handshake fa-4x text-primary"></i>
+                    </div>
+                    <h4>Community Engagement</h4>
+                    <p class="mb-4">Interact with locals and contribute to grassroots initiatives.</p>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="#">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Features End -->
 
-{% endblock %}\
+<!-- Offer Start -->
+<div class="container-fluid offer-section pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Special Offers</h4>
+            <h1 class="display-5 mb-4">Exclusive Travel Deals</h1>
+            <p class="mb-0">Take advantage of our curated packages to explore Kibera at unbeatable rates.</p>
+        </div>
+        <div class="row g-5 align-items-center">
+            <div class="col-xl-5 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="nav nav-pills bg-light rounded p-5">
+                    <a class="accordion-link p-4 active mb-4" data-bs-toggle="pill" href="#collapseOne">
+                        <h5 class="mb-0">Cultural Immersion Tour</h5>
+                    </a>
+                    <a class="accordion-link p-4 mb-4" data-bs-toggle="pill" href="#collapseTwo">
+                        <h5 class="mb-0">Art & Craft Experience</h5>
+                    </a>
+                    <a class="accordion-link p-4 mb-4" data-bs-toggle="pill" href="#collapseThree">
+                        <h5 class="mb-0">Community Impact Day</h5>
+                    </a>
+                    <a class="accordion-link p-4 mb-0" data-bs-toggle="pill" href="#collapseFour">
+                        <h5 class="mb-0">Photography Adventure</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-7 wow fadeInRight" data-wow-delay="0.4s">
+                <div class="tab-content">
+                    <div id="collapseOne" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-md-7">
+                                <img src="data:image/jpeg;base64,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" class="img-fluid w-100 rounded" alt="Cultural Tour">
+                            </div>
+                            <div class="col-md-5">
+                                <h1 class="display-5 mb-4">Dive into Kibera’s Culture</h1>
+                                <p class="mb-4">A full-day tour exploring traditions, music, and local cuisine.</p>
+                                <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'book_now' %}">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapseTwo" class="tab-pane fade p-0">
+                        <div class="row g-4">
+                            <div class="col-md-7">
+                                <img src="https://static.wixstatic.com/media/fce3bb_43eca44cf540499f83ff3e42bc9862ce~mv2.jpeg/v1/fill/w_740,h_555,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fce3bb_43eca44cf540499f83ff3e42bc9862ce~mv2.jpeg" class="img-fluid w-100 rounded" alt="Craft Experience">
+                            </div>
+                            <div class="col-md-5">
+                                <h1 class="display-5 mb-4">Hands-On Art Journey</h1>
+                                <p class="mb-4">Create with local artisans and take home your masterpiece.</p>
+                                <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'book_now' %}">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapseThree" class="tab-pane fade p-0">
+                        <div class="row g-4">
+                            <div class="col-md-7">
+                                <img src="https://ensia.com/wp-content/uploads/2020/07/Feature_KibraGreen_main1-920x458.jpg" class="img-fluid w-100 rounded" alt="Community Day">
+                            </div>
+                            <div class="col-md-5">
+                                <h1 class="display-5 mb-4">Make a Difference</h1>
+                                <p class="mb-4">Join a day of volunteering and community connection.</p>
+                                <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'book_now' %}">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapseFour" class="tab-pane fade p-0">
+                        <div class="row g-4">
+                            <div class="col-md-7">
+                                <img src="https://scontent.fmba5-1.fna.fbcdn.net/v/t39.30808-1/300967729_403768001860475_1238085251093083056_n.jpg?stp=c90.0.540.540a_dst-jpg_s200x200_tt6&_nc_cat=104&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=AiE9MeqYzAoQ7kNvgFf9s62&_nc_oc=AdgT52Hytenn-RAvfDux8Xrh65V4RPXxxUorNYiC3eVcJN8yee6njK1ikuKfcP4ZYgU&_nc_zt=24&_nc_ht=scontent.fmba5-1.fna&_nc_gid=AWI46ROyfpI9AmHEh5sakuw&oh=00_AYCHk3SSvYJxB2SznxVJ4fcpiMeSlwbAhOBQRt7fITbbJg&oe=67CE1127" class="img-fluid w-100 rounded" alt="Photography Tour">
+                            </div>
+                            <div class="col-md-5">
+                                <h1 class="display-5 mb-4">Capture Kibera</h1>
+                                <p class="mb-4">A guided photography tour through Kibera’s vibrant streets.</p>
+                                <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'book_now' %}">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Offer End -->
+
+<!-- Blog Start -->
+<div class="container-fluid blog pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Travel Stories</h4>
+            <h1 class="display-5 mb-4">Kibera Through Our Eyes</h1>
+            <p class="mb-0">Read inspiring stories and tips from travelers and locals alike.</p>
+        </div>
+        <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay="0.2s">
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="{% static 'img/kibera-art-blog.jpg' %}" class="img-fluid w-100 rounded" alt="Art Blog">
+                    <div class="blog-title">
+                        <a href="#" class="btn">Art & Culture</a>
+                    </div>
+                </div>
+                <a href="#" class="h4 d-inline-block mb-3">The Colors of Kibera</a>
+                <p class="mb-4">Exploring the thriving art scene that defines Kibera’s spirit.</p>
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'img/local-guide-1.jpg' %}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Guide">
+                    <div class="ms-3">
+                        <h5>Jane Doe</h5>
+                        <p class="mb-0">March 05, 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="{% static 'img/kibera-community-blog.jpg' %}" class="img-fluid w-100 rounded" alt="Community Blog">
+                    <div class="blog-title">
+                        <a href="#" class="btn">Community</a>
+                    </div>
+                </div>
+                <a href="#" class="h4 d-inline-block mb-3">A Day in Kibera</a>
+                <p class="mb-4">A traveler’s journey through the heart of the community.</p>
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'img/local-guide-2.jpg' %}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Guide">
+                    <div class="ms-3">
+                        <h5>John Smith</h5>
+                        <p class="mb-0">March 05, 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="{% static 'img/kibera-food-blog.jpg' %}" class="img-fluid w-100 rounded" alt="Food Blog">
+                    <div class="blog-title">
+                        <a href="#" class="btn">Cuisine</a>
+                    </div>
+                </div>
+                <a href="#" class="h4 d-inline-block mb-3">Tastes of Kibera</a>
+                <p class="mb-4">Savoring the local flavors that bring people together.</p>
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'img/local-guide-3.jpg' %}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Guide">
+                    <div class="ms-3">
+                        <h5>Mary Wanjiku</h5>
+                        <p class="mb-0">March 05, 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-item p-4">
+                <div class="blog-img mb-4">
+                    <img src="{% static 'img/kibera-tips-blog.jpg' %}" class="img-fluid w-100 rounded" alt="Tips Blog">
+                    <div class="blog-title">
+                        <a href="#" class="btn">Travel Tips</a>
+                    </div>
+                </div>
+                <a href="#" class="h4 d-inline-block mb-3">Visiting Kibera 101</a>
+                <p class="mb-4">Essential tips for a respectful and rewarding visit.</p>
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'img/local-guide-1.jpg' %}" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Guide">
+                    <div class="ms-3">
+                        <h5>Jane Doe</h5>
+                        <p class="mb-0">March 05, 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+<!-- FAQs Start -->
+<div class="container-fluid faq-section pb-5">
+    <div class="container pb-5 overflow-hidden">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">FAQs</h4>
+            <h1 class="display-5 mb-4">Your Questions Answered</h1>
+            <p class="mb-0">Everything you need to know before visiting Kibera with KibraConnect.</p>
+        </div>
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="accordion accordion-flush bg-light rounded p-5" id="accordionFlushSection">
+                    <div class="accordion-item rounded-top">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                What Should I Expect on a Tour?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushSection">
+                            <div class="accordion-body">A guided exploration of Kibera’s culture, art, and community, led by locals.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Is It Safe to Visit Kibera?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushSection">
+                            <div class="accordion-body">Yes, our tours are conducted with safety in mind, guided by experienced locals.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                What Should I Bring?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushSection">
+                            <div class="accordion-body">Comfortable shoes, water, a camera, and an open mind!</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                How Do I Book a Tour?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushSection">
+                            <div class="accordion-body">Visit our booking page or contact us directly to reserve your spot.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                Can I Customize My Tour?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushSection">
+                            <div class="accordion-body">Yes, contact us to tailor your experience to your interests.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item rounded-bottom">
+                        <h2 class="accordion-header" id="flush-headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                                How Does My Visit Help Kibera?
+                            </button>
+                        </h2>
+                        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushSection">
+                            <div class="accordion-body">Proceeds support local guides, artists, and community projects.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <div class="bg-primary rounded">
+                    <img src="{% static 'img/kibera-guide.jpg' %}" class="img-fluid w-100" alt="Local Guide">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQs End -->
+
+<!-- Team Start -->
+<div class="container-fluid team pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Team</h4>
+            <h1 class="display-5 mb-4">Meet Your Guides</h1>
+            <p class="mb-0">Our local experts are passionate about sharing Kibera’s stories with the world.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{% static 'img/guide-1.jpg' %}" class="img-fluid" alt="Guide 1">
+                    </div>
+                    <div class="team-title">
+                        <h4 class="mb-0">James Otieno</h4>
+                        <p class="mb-0">Lead Guide</p>
+                    </div>
+                    <div class="team-icon">
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{% static 'img/guide-2.jpg' %}" class="img-fluid" alt="Guide 2">
+                    </div>
+                    <div class="team-title">
+                        <h4 class="mb-0">Amina Hassan</h4>
+                        <p class="mb-0">Cultural Expert</p>
+                    </div>
+                    <div class="team-icon">
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{% static 'img/guide-3.jpg' %}" class="img-fluid" alt="Guide 3">
+                    </div>
+                    <div class="team-title">
+                        <h4 class="mb-0">Peter Mwangi</h4>
+                        <p class="mb-0">Art Guide</p>
+                    </div>
+                    <div class="team-icon">
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="team-item">
+                    <div class="team-img">
+                        <img src="{% static 'img/guide-4.jpg' %}" class="img-fluid" alt="Guide 4">
+                    </div>
+                    <div class="team-title">
+                        <h4 class="mb-0">Grace Wambui</h4>
+                        <p class="mb-0">Community Liaison</p>
+                    </div>
+                    <div class="team-icon">
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+<!-- Testimonial Start -->
+<div class="container-fluid testimonial pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Testimonials</h4>
+            <h1 class="display-5 mb-4">What Travelers Say</h1>
+            <p class="mb-0">Hear from visitors who’ve experienced Kibera with us.</p>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
+            <div class="testimonial-item">
+                <div class="testimonial-quote-left">
+                    <i class="fas fa-quote-left fa-2x"></i>
+                </div>
+                <div class="testimonial-img">
+                    <img src="{% static 'img/traveler-1.jpg' %}" class="img-fluid" alt="Traveler 1">
+                </div>
+                <div class="testimonial-text">
+                    <p class="mb-0">An eye-opening experience! The guides were incredible, and I felt truly connected to Kibera.</p>
+                </div>
+                <div class="testimonial-title">
+                    <div>
+                        <h4 class="mb-0">Sarah Johnson</h4>
+                        <p class="mb-0">Tourist</p>
+                    </div>
+                    <div class="d-flex text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-quote-right">
+                    <i class="fas fa-quote-right fa-2x"></i>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <div class="testimonial-quote-left">
+                    <i class="fas fa-quote-left fa-2x"></i>
+                </div>
+                <div class="testimonial-img">
+                    <img src="{% static 'img/traveler-2.jpg' %}" class="img-fluid" alt="Traveler 2">
+                </div>
+                <div class="testimonial-text">
+                    <p class="mb-0">The art tour was a highlight—such talent and passion in every corner!</p>
+                </div>
+                <div class="testimonial-title">
+                    <div>
+                        <h4 class="mb-0">Mark Davies</h4>
+                        <p class="mb-0">Photographer</p>
+                    </div>
+                    <div class="d-flex text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-quote-right">
+                    <i class="fas fa-quote-right fa-2x"></i>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <div class="testimonial-quote-left">
+                    <i class="fas fa-quote-left fa-2x"></i>
+                </div>
+                <div class="testimonial-img">
+                    <img src="{% static 'img/traveler-3.jpg' %}" class="img-fluid" alt="Traveler 3">
+                </div>
+                <div class="testimonial-text">
+                    <p class="mb-0">A humbling and inspiring visit. I’ll be back for more!</p>
+                </div>
+                <div class="testimonial-title">
+                    <div>
+                        <h4 class="mb-0">Lilian Mwangi</h4>
+                        <p class="mb-0">Volunteer</p>
+                    </div>
+                    <div class="d-flex text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-quote-right">
+                    <i class="fas fa-quote-right fa-2x"></i>
+                </div>
+            </div>
+            <div class="testimonial-item">
+                <div class="testimonial-quote-left">
+                    <i class="fas fa-quote-left fa-2x"></i>
+                </div>
+                <div class="testimonial-img">
+                    <img src="{% static 'img/traveler-4.jpg' %}" class="img-fluid" alt="Traveler 4">
+                </div>
+                <div class="testimonial-text">
+                    <p class="mb-0">KibraConnect made this trip unforgettable—highly recommend!</p>
+                </div>
+                <div class="testimonial-title">
+                    <div>
+                        <h4 class="mb-0">Emma Kimani</h4>
+                        <p class="mb-0">Traveler</p>
+                    </div>
+                    <div class="d-flex text-primary">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-quote-right">
+                    <i class="fas fa-quote-right fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+{% endblock %}
+
+{% block footer_description %}
+KibraConnect - Connecting you to the heart of Kibera through authentic, sustainable tourism experiences.
+{% endblock %}
+
+{% block address %}Kibera, Nairobi, Kenya{% endblock %}
+{% block email %}travel@kibraconnect.com{% endblock %}
+{% block phone %}+254 123 456 789{% endblock %}
+{% block site_name %}KibraConnect{% endblock %}
