@@ -5,61 +5,128 @@
 
 {% block content %}
 <!-- Header Start -->
-<div class="container-fluid bg-breadcrumb">
-    <div class="container text-center py-5" style="max-width: 900px;">
-        <h4 class="text-white display-4 fw-bold mb-4 wow fadeInDown" data-wow-delay="0.1s">Login or Sign Up</h4>
-        <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-            <li class="breadcrumb-item active text-primary">Login/Signup</li>
+<div class="container-fluid" style="background: linear-gradient(to right, #28a745, #218838); padding: 60px 0;">
+    <div class="container text-center" style="max-width: 900px; padding: 20px;">
+        <h4 class="text-white" style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px; animation: fadeInDown 0.5s ease;">Login or Sign Up</h4>
+        <ol class="breadcrumb justify-content-center mb-0" style="background: transparent; animation: fadeInDown 0.7s ease;">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}" style="color: #fff; text-decoration: none;">Home</a></li>
+            <li class="breadcrumb-item active" style="color: #c8e6c9;">Login/Signup</li>
         </ol>    
     </div>
 </div>
 <!-- Header End -->
 
 <!-- Auth Section Start -->
-<div class="container py-5">
-    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-        <h4 class="text-primary">Get Started</h4>
-        <h1 class="display-4 mb-4">Log In or Create an Account</h1>
-        <p class="mb-0">Access exclusive destinations and features by logging in or signing up below.</p>
+<div class="container py-5" style="max-width: 1200px; margin: 0 auto;">
+    <div class="text-center mx-auto pb-5" style="max-width: 800px; animation: fadeInUp 0.5s ease;">
+        <h4 class="text-primary" style="font-size: 1.5rem; color: #28a745; margin-bottom: 10px;">Get Started</h4>
+        <h1 class="display-4 mb-4" style="font-size: 2.5rem; color: #333; margin-bottom: 20px;">Log In or Create an Account</h1>
+        <p class="mb-0" style="font-size: 1rem; color: #666;">Access exclusive destinations and features by logging in or signing up below.</p>
     </div>
 
     {% if messages %}
         {% for message in messages %}
-            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} text-center" role="alert">
+            <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} text-center" style="padding: 15px; margin-bottom: 20px; border-radius: 10px; animation: fadeInUp 0.5s ease;">
                 {{ message }}
             </div>
         {% endfor %}
     {% endif %}
 
-    <div class="row g-5 justify-content-center">
+    <div class="row g-5 justify-content-center" style="margin: 0 auto;">
         <!-- Login Form -->
-        <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="bg-light p-4 rounded">
-                <h3 class="text-primary mb-4">Log In</h3>
+        <div class="col-lg-5 col-md-6" style="animation: fadeInUp 0.7s ease;">
+            <div class="bg-light p-4 rounded" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h3 class="text-primary mb-4" style="font-size: 1.5rem; color: #28a745; margin-bottom: 20px;">Log In</h3>
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" name="login" value="1">
                     {{ login_form.as_p }}
-                    <button type="submit" class="btn btn-primary w-100 py-2">Log In</button>
+                    <button type="submit" class="btn btn-primary w-100 py-2" style="background: #28a745; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; transition: background-color 0.3s ease;">Log In</button>
                 </form>
-                <p class="text-center mt-3"><a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-outline-primary w-100">Log In with Google</a></p>
+                <p class="text-center mt-3" style="margin-top: 20px;">
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-outline-primary w-100" style="background: transparent; border: 2px solid #28a745; color: #28a745; padding: 10px 20px; font-size: 1rem; border-radius: 25px; transition: background-color 0.3s ease;">Log In with Google</a>
+                </p>
             </div>
         </div>
 
         <!-- Signup Form -->
-        <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-            <div class="bg-light p-4 rounded">
-                <h3 class="text-primary mb-4">Sign Up</h3>
+        <div class="col-lg-5 col-md-6" style="animation: fadeInUp 0.9s ease;">
+            <div class="bg-light p-4 rounded" style="background: #fff; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h3 class="text-primary mb-4" style="font-size: 1.5rem; color: #28a745; margin-bottom: 20px;">Sign Up</h3>
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" name="signup" value="1">
                     {{ signup_form.as_p }}
-                    <button type="submit" class="btn btn-primary w-100 py-2">Sign Up</button>
+                    <button type="submit" class="btn btn-primary w-100 py-2" style="background: #28a745; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; transition: background-color 0.3s ease;">Sign Up</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <!-- Auth Section End -->
+
+<!-- Inline CSS for Animations -->
+<style>
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Form Input Styling */
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 2px solid #c8e6c9;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #28a745;
+        outline: none;
+    }
+
+    /* Button Hover Effects */
+    .btn-primary:hover, .btn-outline-primary:hover {
+        background-color: #218838 !important;
+        border-color: #218838 !important;
+        color: white !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .col-lg-5, .col-md-6 {
+            width: 100%;
+            max-width: 100%;
+        }
+        h1 {
+            font-size: 2rem !important;
+        }
+        h4 {
+            font-size: 1.2rem !important;
+        }
+        p {
+            font-size: 0.9rem !important;
+        }
+    }
+</style>
 {% endblock %}

@@ -704,6 +704,55 @@
     </div>
 </div>
 <!-- Testimonial End -->
+ <!-- Map Start -->
+<div class="container-fluid map-section pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Explore Kibera</h4>
+            <h1 class="display-5 mb-4">Find Us on the Map</h1>
+            <p class="mb-0">Discover key locations in Kibera that you can visit with KibraConnect.</p>
+        </div>
+        <div id="map" style="height: 400px; width: 100%;" class="wow fadeInUp" data-wow-delay="0.2s"></div>
+    </div>
+</div>
+<!-- Map End -->
+
+<!-- Google Maps Script -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvnahmW9ZdJrz5x5LR7pFE3dXXbkuVObs&callback=initMap" async defer></script>
+<script>
+    function initMap() {
+        // Center map on Kibera
+        var kibera = { lat: -1.3121, lng: 36.7905 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: kibera
+        });
+
+        // Define locations
+        var locations = [
+            { lat: -1.3121, lng: 36.7905, title: "Kibera Community Center", desc: "A hub for local activities." },
+            { lat: -1.3105, lng: 36.7880, title: "HOF Gallery Kibera", desc: "Discover social justice art." },
+            { lat: -1.313131, lng: 36.779354, title: "Uweza Art Gallery", desc: "Empowering young artists." },
+            { lat: -1.3110, lng: 36.7890, title: "Kibera Marketplace", desc: "Experience local commerce." }
+        ];
+
+        // Add markers
+        locations.forEach(function(location) {
+            var marker = new google.maps.Marker({
+                position: { lat: location.lat, lng: location.lng },
+                map: map,
+                title: location.title
+            });
+            var infoWindow = new google.maps.InfoWindow({
+                content: `<h5>${location.title}</h5><p>${location.desc}</p>`
+            });
+            marker.addListener('click', function() {
+                infoWindow.open(map, marker);
+            });
+        });
+    }
+</script>
+
 {% endblock %}
 
 {% block footer_description %}

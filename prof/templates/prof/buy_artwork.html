@@ -4,19 +4,78 @@
 {% block title %}KibraConnect - Buy Artwork{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h1>Buy Artwork: {{ artwork.title }}</h1>
-    <p>Artist: {{ artwork.artist.full_name|default:artwork.artist.user.username }}</p>
-    <p>Price: KES {{ artwork.price }}</p>
+<div class="container py-5" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <!-- Artwork Header -->
+    <h1 style="font-size: 2.5rem; color: #4caf50; margin-bottom: 20px; text-align: center; font-family: 'Pacifico', cursive; font-weight: normal;">Buy Artwork: {{ artwork.title }}</h1>
+
+    <!-- Artwork Details -->
+    <div class="artwork-details" style="background: #f0f8f0; border-radius: 15px; padding: 20px; margin-bottom: 30px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+        <p style="font-size: 1.2rem; color: #333; margin-bottom: 10px; font-family: 'Roboto', sans-serif;">🎨 <strong>Artist:</strong> {{ artwork.artist.full_name|default:artwork.artist.user.username }}</p>
+        <p style="font-size: 1.2rem; color: #333; margin-bottom: 10px; font-family: 'Roboto', sans-serif;">💰 <strong>Price:</strong> KES {{ artwork.price }}</p>
+    </div>
+
+    <!-- Messages -->
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            <div class="alert alert-{{ message.tags }}" style="background: {% if message.tags == 'success' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if message.tags == 'success' %}#155724{% else %}#721c24{% endif %}; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-family: 'Roboto', sans-serif;">
+                {{ message }}
+            </div>
         {% endfor %}
     {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Proceed to Payment</button>
-    </form>
+
+    <!-- Payment Form -->
+    <div class="payment-form" style="background: #ffffff; border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 1.8rem; color: #4caf50; margin-bottom: 20px; text-align: center; font-family: 'Pacifico', cursive; font-weight: normal;">💳 Proceed to Payment</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 20px;">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary" style="background: #4caf50; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; width: 100%; transition: background-color 0.3s ease; font-family: 'Roboto', sans-serif;">
+                🛒 Proceed to Payment
+            </button>
+        </form>
+    </div>
 </div>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Custom CSS -->
+<style>
+    /* Form Input Styling */
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 2px solid #c8e6c9;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: #4caf50;
+        outline: none;
+    }
+
+    /* Button Hover Effect */
+    .btn-primary:hover {
+        background-color: #388e3c !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem !important;
+        }
+        .artwork-details p, .payment-form h2 {
+            font-size: 1rem !important;
+        }
+        .container {
+            padding: 10px !important;
+        }
+    }
+</style>
 {% endblock %}

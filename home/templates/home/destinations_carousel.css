@@ -83,4 +83,147 @@
 .swiper-3d .swiper-slide-shadow-left,
 .swiper-3d .swiper-slide-shadow-right {
     background-image: none;
+}@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap");
+
+/* Global Styles */
+.destinations-carousel {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #28a745; /* Light green background */
+    overflow: hidden;
+    padding: 40px 0; /* Added padding for better spacing */
+}
+
+/* Swiper Container */
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* Swiper Slide */
+.swiper-slide {
+    width: 300px;
+    height: 400px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    filter: blur(1px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    background: #ffffff; /* White slide background */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Smooth transitions */
+    cursor: pointer; /* Indicates interactivity */
+}
+
+/* Active Slide */
+.swiper-slide-active {
+    filter: blur(0px);
+    transform: scale(1.05); /* Slightly enlarge the active slide */
+}
+
+/* Slide Hover Effect */
+.swiper-slide:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Swiper Pagination Bullets */
+.swiper-pagination-bullet {
+    background: #ffffff; /* White bullets */
+    opacity: 0.7;
+    transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #28a745; /* Green active bullet */
+    opacity: 1;
+}
+
+/* Slide Content Styling */
+.swiper-slide span {
+    text-transform: uppercase;
+    color: #ffffff; /* White text */
+    background: #218838; /* Slightly darker green for contrast */
+    padding: 7px 18px 7px 25px;
+    display: inline-block;
+    border-radius: 0 20px 20px 0;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 10px; /* Added spacing */
+}
+
+.swiper-slide h2 {
+    color: #28a745; /* Green title */
+    font-family: "Roboto", sans-serif;
+    font-weight: 500; /* Slightly bolder for emphasis */
+    font-size: 1.5rem; /* Larger font size */
+    line-height: 1.4;
+    margin-bottom: 15px;
+    padding: 0 25px; /* Consistent padding */
+}
+
+.swiper-slide p {
+    color: #333333; /* Dark gray for readability */
+    font-family: "Roboto", sans-serif;
+    font-weight: 400; /* Slightly bolder for better readability */
+    display: flex;
+    align-items: center;
+    padding: 0 25px 25px 25px; /* Adjusted padding */
+    font-size: 0.9rem; /* Slightly larger font size */
+    line-height: 1.5; /* Improved line spacing */
+}
+
+.swiper-slide svg {
+    color: #28a745; /* Green location icon */
+    width: 22px;
+    height: 22px;
+    margin-right: 7px;
+}
+
+/* Remove Swiper Shadows */
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right {
+    background-image: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .destinations-carousel {
+        padding: 20px 0; /* Reduced padding for smaller screens */
+    }
+
+    .swiper-slide {
+        width: 250px; /* Smaller slides for mobile */
+        height: 350px;
+    }
+
+    .swiper-slide h2 {
+        font-size: 1.3rem; /* Smaller font size for mobile */
+    }
+
+    .swiper-slide p {
+        font-size: 0.8rem; /* Smaller font size for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .swiper-slide {
+        width: 220px; /* Even smaller slides for small phones */
+        height: 320px;
+    }
+
+    .swiper-slide h2 {
+        font-size: 1.2rem; /* Smaller font size for small phones */
+    }
+
+    .swiper-slide p {
+        font-size: 0.75rem; /* Smaller font size for small phones */
+    }
 }
