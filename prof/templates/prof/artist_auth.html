@@ -1,44 +1,68 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Authentication</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% load socialaccount %}
 
-    <div class="auth-container">
-        <h2>{{ "Login" if mode == "login" else "Sign Up" }}</h2>
+{% block title %}Artist Authentication{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; 
+            background: url('https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg') no-repeat center center/cover;">
+
+    <div style="max-width: 400px; width: 100%; background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 12px;
+                backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); text-align: center; color: #fff;">
+        
+        <h2>{% if mode == "login" %}Login{% else %}Sign Up{% endif %}</h2>
 
         {% if messages %}
-            <ul class="messages">
+            <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
                 {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>
+                    <li style="padding: 10px; margin: 5px 0; border-radius: 5px; font-size: 14px;
+                               {% if message.tags == 'error' %} background: rgba(255, 77, 77, 0.8); color: #fff; 
+                               {% elif message.tags == 'success' %} background: rgba(46, 204, 113, 0.8); color: #fff; 
+                               {% endif %}">
+                        {{ message }}
+                    </li>
                 {% endfor %}
             </ul>
         {% endif %}
 
-        <form method="post">
+        <form method="post" action="{% url 'prof:artist_auth' %}?mode={{ mode }}" style="display: flex; flex-direction: column; gap: 15px;">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">{{ "Login" if mode == "login" else "Sign Up" }}</button>
+            
+            {% if mode == "login" %}
+                <a href="{% url 'account_reset_password' %}" 
+                   style="display: block; text-align: right; font-size: 14px; color: #f1c40f; text-decoration: none; 
+                          margin-top: -10px; margin-bottom: 10px;">
+                    Forgot Password?
+                </a>
+            {% endif %}
+
+            <button type="submit" style="width: 100%; padding: 10px; border: none; border-radius: 5px; background: #fff; 
+                                         color: #333; font-weight: bold; cursor: pointer; transition: 0.3s ease-in-out;"
+                    onmouseover="this.style.background='#f1c40f'" onmouseout="this.style.background='#fff'">
+                {% if mode == "login" %}Log In{% else %}Sign Up{% endif %}
+            </button>
         </form>
 
-        <p>
+        <p style="margin-top: 15px;">
             {% if mode == "login" %}
-                Don't have an account? <a href="{% url 'prof:artist_auth' %}?mode=signup">Sign up here</a>.
+                Don't have an account? <a href="{% url 'prof:artist_auth' %}?mode=signup" style="color: #f1c40f;">Sign up here</a>.
             {% else %}
-                Already have an account? <a href="{% url 'prof:artist_auth' %}?mode=login">Login here</a>.
+                Already have an account? <a href="{% url 'prof:artist_auth' %}?mode=login" style="color: #f1c40f;">Login here</a>.
             {% endif %}
         </p>
 
-        <hr>
+        <hr style="margin: 20px 0; border: 0; height: 1px; background: rgba(255, 255, 255, 0.2);">
+
         <a href="{% provider_login_url 'google' %}?next={{ request.GET.next|default:'/' }}">
-            <button class="google-login">Login with Google</button>
+            <button style="display: block; width: 100%; padding: 10px; border: none; border-radius: 5px; 
+                           background: #4285f4; color: #fff; font-weight: bold; cursor: pointer; text-align: center;"
+                    onmouseover="this.style.background='#357abd'" onmouseout="this.style.background='#4285f4'">
+                Login with Google
+            </button>
         </a>
     </div>
 
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KibraConnect - Art Gallery{% endblock %}
+
+{% block brand_name %}KibraConnect{% endblock %}
+{% block footer_brand_name %}KibraConnect{% endblock %}
+
+{% block content %}
+<!-- Gallery Header Start -->
+<div class="container-fluid gallery-header py-5 bg-primary text-white">
+    <div class="container py-5">
+        <div class="text-center">
+            <h1 class="display-4 mb-4">Kibera Art Gallery</h1>
+            <p class="fs-5 mb-0">Explore the vibrant works of Kibera’s talented artists, each piece telling a story of resilience, culture, and creativity.</p>
+        </div>
+    </div>
+</div>
+<!-- Gallery Header End -->
+
+<!-- Gallery Start -->
+<div class="container-fluid gallery py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Collection</h4>
+            <h1 class="display-5 mb-4">Artworks by Kibera’s Finest</h1>
+            <p class="mb-0">Browse our curated selection of paintings, sculptures, and mixed media, available for purchase to support local talent.</p>
+        </div>
+        <div class="row g-4">
+            {% for artwork in artworks %}
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="gallery-item border rounded overflow-hidden">
+                        {% if artwork.image %}
+                            <img src="{{ artwork.image.url }}" class="img-fluid w-100" alt="{{ artwork.title }}">
+                        {% else %}
+                            <img src="{% static 'img/default-art.jpg' %}" class="img-fluid w-100" alt="Default Art">
+                        {% endif %}
+                        <div class="p-4">
+                            <h4 class="mb-2">"{{ artwork.title }}"</h4>
+                            <p class="mb-2"><strong>Artist:</strong> {{ artwork.artist.full_name|default:artwork.artist.user.email }}</p>
+                            <p class="mb-2"><strong>Medium:</strong> {{ artwork.artist.get_artistic_style_display|default:"Not specified" }}</p>
+                            <p class="mb-2"><strong>Price:</strong> KSH {{ artwork.price }}</p>
+                            <p class="mb-4">{{ artwork.description|default:"No description provided" }}</p>
+                            {% if artwork.is_available %}
+                                <a href="{% url 'prof:buy_artwork' artwork.id %}" class="btn btn-primary rounded-pill py-2 px-4">Buy Now</a>
+                            {% else %}
+                                <span class="btn btn-secondary rounded-pill py-2 px-4 disabled">Sold</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p>No artwork available yet.</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <!-- Optional: Add a "Load More" button if needed -->
+        </div>
+    </div>
+</div>
+<!-- Gallery End -->
+{% endblock %}
+
+{% block footer_description %}
+KibraConnect - Connecting you to the heart of Kibera through authentic, sustainable tourism experiences and art.
+{% endblock %}
+
+{% block address %}Kibera, Nairobi, Kenya{% endblock %}
+{% block email %}travel@kibraconnect.com{% endblock %}
+{% block phone %}+254 123 456 789{% endblock %}
+{% block site_name %}KibraConnect{% endblock %}

@@ -20,8 +20,10 @@ def home(request):
     context = {
         'is_artist': is_artist(request.user),
         'is_normal_user': is_normal_user(request.user),
+        'latest_artworks': Artwork.objects.all().order_by('-created_at')[:3]  # Fetch latest 3 artworks
     }
-    return render(request, 'home/index.html', context)
+    return render(request, 'home/index.html', context)  # Pass a single merged dictionary
+
 
 def role_selection(request):
     logger.info(f"Role selection page accessed with request: {request}")
@@ -164,4 +166,5 @@ def book_now(request):
     return render(request, 'home/book_now.html')
 
 def gallery(request):
-    return render(request, 'home/gallery.html')
+    artworks = Artwork.objects.all()  # Fetch all artworks
+    return render(request, 'home/gallery.html', {'artworks': artworks})

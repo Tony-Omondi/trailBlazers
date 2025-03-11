@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}KibraConnect - Payment Successful{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1>Payment Successful!</h1>
+    <p>Thank you for your purchase of "{{ order.artwork.title }}".</p>
+    <p>Transaction ID: {{ order.transaction_id }}</p>
+    <p>Amount: KES {{ order.amount }}</p>
+    <p>Details have been sent to your email: {{ order.buyer_email }}</p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+</div>
+{% endblock %}
