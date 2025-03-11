@@ -1,25 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Artist Dashboard</h1>
-<h2>Welcome, {{ artist_profile.user.username }}</h2>
-<p>Full Name: {{ artist_profile.full_name|default:"Not set" }}</p>
-<p>Bio: {{ artist_profile.bio|default:"Not set" }}</p>
-<p>Email: {{ artist_profile.email_public|default:"Not set" }}</p>
-<p>Phone: {{ artist_profile.phone_number|default:"Not set" }}</p>
-<p>Location: {{ artist_profile.location|default:"Not set" }}</p>
-<a href="{% url 'prof:edit_artist_profile' %}">Update Profile</a>
-<h3>Your Artworks</h3>
-<a href="{% url 'prof:upload_artwork' %}">Upload New Artwork</a>
-{% for artwork in artworks %}
-    <div>
-        <h4>{{ artwork.title }}</h4>
-        <p>{{ artwork.description }}</p>
-        <p>Price: ${{ artwork.price }}</p>
-        {% if artwork.image %}
-            <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}" style="max-width: 200px;">
-        {% endif %}
+<div class="container py-5" style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: 'Arial', sans-serif; background-color: white; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <!-- Header Section -->
+    <h1 style="font-size: 2.5rem; color: #4caf50; margin-bottom: 20px;">🎨 Artist Dashboard</h1>
+    <h2 style="font-size: 2rem; color: #333; margin-bottom: 20px;">Welcome, {{ artist_profile.user.username }}!</h2>
+
+    <!-- Profile Details Section -->
+    <div style="background-color: #e8f5e9; border: 2px solid #c8e6c9; border-radius: 15px; padding: 20px; margin-bottom: 30px;">
+        <h3 style="font-size: 1.5rem; color: #2e7d32; margin-bottom: 15px;">👤 Profile Details</h3>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Full Name:</strong> {{ artist_profile.full_name|default:"Not set" }}</p>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Bio:</strong> {{ artist_profile.bio|default:"Not set" }}</p>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Email:</strong> {{ artist_profile.email_public|default:"Not set" }}</p>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Phone:</strong> {{ artist_profile.phone_number|default:"Not set" }}</p>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Location:</strong> {{ artist_profile.location|default:"Not set" }}</p>
+        <a href="{% url 'prof:edit_artist_profile' %}" style="background-color: #4caf50; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; text-decoration: none; transition: background-color 0.3s ease; display: inline-block; margin-top: 10px;">
+            ✏️ Update Profile
+        </a>
     </div>
-{% empty %}
-    <p>No artworks yet.</p>
-{% endfor %}
+
+    <!-- Artworks Section -->
+    <div>
+        <h3 style="font-size: 1.5rem; color: #2e7d32; margin-bottom: 20px;">🖼️ Your Artworks</h3>
+        <a href="{% url 'prof:upload_artwork' %}" style="background-color: #4caf50; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; text-decoration: none; transition: background-color 0.3s ease; display: inline-block; margin-bottom: 20px;">
+            🎨 Upload New Artwork
+        </a>
+
+        <!-- Artworks List -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            {% for artwork in artworks %}
+                <div style="background-color: #f8f9fa; border: 2px solid #c8e6c9; border-radius: 15px; padding: 20px; text-align: center;">
+                    <h4 style="font-size: 1.25rem; color: #333; margin-bottom: 10px;">{{ artwork.title }}</h4>
+                    <p style="font-size: 1rem; color: #666; margin-bottom: 10px;">{{ artwork.description }}</p>
+                    <p style="font-size: 1rem; color: #4caf50; margin-bottom: 10px;"><strong>Price:</strong> ${{ artwork.price }}</p>
+                    {% if artwork.image %}
+                        <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}" style="max-width: 100%; border-radius: 10px; margin-bottom: 10px;">
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p style="font-size: 1rem; color: #666;">No artworks yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Google Fonts for Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+    /* Hover effect for buttons */
+    a:hover {
+        background-color: #388e3c !important;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+        .container {
+            padding: 10px;
+        }
+        .artwork-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 {% endblock %}

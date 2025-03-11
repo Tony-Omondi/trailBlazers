@@ -49,7 +49,7 @@ def register_ipn(token):
         "Authorization": f"Bearer {token}"
     }
     data = {
-        "url": "https://your-ngrok-url.ngrok-free.app/prof/pesapal-ipn/",  # Replace with your IPN URL
+        "url": "https://your-ngrok-url.ngrok-free.app/prof/pesapal-ipn/",  # Replace with your ngrok URL
         "ipn_notification_type": "POST"
     }
     response = requests.post(ipn_registration_url, headers=headers, json=data)
@@ -96,7 +96,8 @@ def submit_order(token, ipn_id, artwork, buyer_details):
 
     response = requests.post(submit_order_url, headers=headers, json=data)
     if response.status_code == 200:
-        return response.json(), merchant_reference
+        order_response = response.json()
+        return order_response, merchant_reference
     else:
         logger.error(f"Error submitting order: {response.status_code}")
         return None, None
@@ -190,6 +191,13 @@ def artist_auth(request):
 
     return render(request, 'prof/artist_auth.html', {'mode': mode, 'form': form})
 
+def gallery(request):
+    artworks = Artwork.objects.filter(is_available=True)
+    context = {
+        'artworks': artworks,
+    }
+    return render(request, 'prof/gallery.html', context)
+
 def buy_artwork(request, artwork_id):
     artwork = get_object_or_404(Artwork, id=artwork_id, is_available=True)
     if request.method == 'POST':
@@ -200,26 +208,24 @@ def buy_artwork(request, artwork_id):
                 'email': form.cleaned_data['buyer_email'],
                 'phone': form.cleaned_data['buyer_phone']
             }
-            # Step 1: Get token
             token = request_token()
             if not token:
                 messages.error(request, "Failed to initiate payment. Please try again.")
                 return redirect('prof:buy_artwork', artwork_id=artwork.id)
 
-            # Step 2: Register IPN
             ipn_id = register_ipn(token)
             if not ipn_id:
                 messages.error(request, "Failed to set up payment notifications. Please try again.")
                 return redirect('prof:buy_artwork', artwork_id=artwork.id)
 
-            # Step 3: Submit order
             order_response, merchant_reference = submit_order(token, ipn_id, artwork, buyer_details)
             if order_response and order_response.get('status') == "200":
-                # Create a pending order
+                order_tracking_id = order_response.get('order_tracking_id')
                 order = Order.objects.create(
                     buyer=request.user,
                     artwork=artwork,
-                    transaction_id=order_response.get('order_tracking_id'),
+                    transaction_id=order_tracking_id,  # Store order_tracking_id as transaction_id
+                    merchant_reference=str(merchant_reference),  # Store merchant_reference
                     buyer_name=buyer_details['name'],
                     buyer_email=buyer_details['email'],
                     buyer_phone=buyer_details['phone'],
@@ -227,6 +233,7 @@ def buy_artwork(request, artwork_id):
                     amount=artwork.price,
                     is_completed=False
                 )
+                logger.info(f"Created order with merchant_reference: {merchant_reference}, transaction_id: {order_tracking_id}")
                 return render(request, 'prof/payment_iframe.html', {
                     'redirect_url': order_response.get('redirect_url'),
                     'order': order
@@ -240,17 +247,19 @@ def buy_artwork(request, artwork_id):
 
 def payment_success(request):
     merchant_reference = request.GET.get('merchant_reference')
-    order = get_object_or_404(Order, transaction_id=merchant_reference)
+    logger.info(f"Looking for order with merchant_reference: {merchant_reference}")
+    order = get_object_or_404(Order, merchant_reference=merchant_reference)  # Match by merchant_reference
     order.is_completed = True
-    order.artwork.is_available = False  # Mark artwork as sold
+    order.artwork.is_available = False
     order.artwork.save()
-    order.save()  # This triggers email notifications
+    order.save()  # Triggers email notifications
     return render(request, 'prof/payment_success.html', {'order': order})
 
 def pesapal_ipn(request):
     if request.method == 'POST':
         data = request.POST
         order_tracking_id = data.get('OrderTrackingId')
+        logger.info(f"IPN received for OrderTrackingId: {order_tracking_id}")
         order = Order.objects.filter(transaction_id=order_tracking_id).first()
         if order:
             order.is_completed = True

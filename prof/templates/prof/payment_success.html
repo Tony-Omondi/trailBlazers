@@ -4,12 +4,87 @@
 {% block title %}KibraConnect - Payment Successful{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <h1>Payment Successful!</h1>
-    <p>Thank you for your purchase of "{{ order.artwork.title }}".</p>
-    <p>Transaction ID: {{ order.transaction_id }}</p>
-    <p>Amount: KES {{ order.amount }}</p>
-    <p>Details have been sent to your email: {{ order.buyer_email }}</p>
-    <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+<div class="container py-5 text-center" style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Pacifico', cursive; background-color: white; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <!-- Header with a cute emoji -->
+    <h1 style="font-size: 2.5rem; color: #4caf50; margin-bottom: 20px;">🎉 Payment Successful! 🎉</h1>
+
+    <!-- Success message with light green background -->
+    <div style="background-color: #e8f5e9; border: 2px solid #c8e6c9; color: #2e7d32; padding: 20px; border-radius: 15px; margin-bottom: 20px; font-size: 1.2rem;">
+        Thank you for your purchase of <strong>"{{ order.artwork.title }}"</strong>. We hope it brings you joy! 💚
+    </div>
+
+    <!-- Order details card with light green accents -->
+    <div id="receipt" style="background-color: white; border: 2px solid #c8e6c9; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 400px; margin: 0 auto; padding: 20px;">
+        <h5 style="font-size: 1.5rem; margin-bottom: 15px; color: #4caf50;">✨ Order Details ✨</h5>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Transaction ID:</strong> {{ order.transaction_id }}</p>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Amount:</strong> KES {{ order.amount }}</p>
+        <p style="font-size: 1rem; margin-bottom: 10px;"><strong>Email:</strong> {{ order.buyer_email }}</p>
+    </div>
+
+    <!-- Download PDF button -->
+    <button id="download-pdf" style="background-color: #4caf50; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; text-decoration: none; transition: background-color 0.3s ease; display: inline-block; margin-top: 20px; cursor: pointer;">
+        📄 Download Receipt as PDF
+    </button>
+
+    <!-- Back to home button -->
+    <p style="margin-top: 20px; font-size: 1rem; color: #666;">
+        <a href="{% url 'home' %}" style="background-color: #4caf50; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; text-decoration: none; transition: background-color 0.3s ease; display: inline-block; margin-top: 10px;">
+            🏠 Back to Home
+        </a>
+    </p>
 </div>
+
+<!-- Confetti Animation -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+    // Trigger confetti animation
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+</script>
+
+<!-- html2pdf.js Library for PDF Download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    // Download PDF functionality
+    document.getElementById('download-pdf').addEventListener('click', () => {
+        const element = document.getElementById('receipt');
+        const options = {
+            margin: 10,
+            filename: 'payment_receipt.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().from(element).set(options).save();
+    });
+</script>
+
+<!-- Google Fonts for Playful Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+    /* Hover effect for buttons */
+    button:hover, a:hover {
+        background-color: #388e3c !important;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+        .container {
+            padding: 10px;
+        }
+        #receipt {
+            margin: 0 10px;
+        }
+        button, a {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+</style>
 {% endblock %}
