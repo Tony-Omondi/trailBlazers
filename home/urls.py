@@ -7,8 +7,8 @@ urlpatterns = [
     path('about/', views.about_us, name='about_us'),
     
     
-    path('destinations/', views.destinations, name='destinations'),
-    path('destinations/<int:destination_id>/', views.destination_detail, name='destination_detail'),
+    # path('destinations/', views.destinations, name='destinations'),
+    # path('destinations/<int:destination_id>/', views.destination_detail, name='destination_detail'),
     path('tours/', views.tours, name='tours'),
     path('travel_guides/', views.travel_guides, name='travel_guides'),
     path('special_offers/', views.special_offers, name='special_offers'),

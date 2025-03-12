@@ -13,6 +13,8 @@ urlpatterns = [
     path('buy/<int:artwork_id>/', views.buy_artwork, name='buy_artwork'),
     path('payment-success/', views.payment_success, name='payment_success'),
     path('pesapal-ipn/', views.pesapal_ipn, name='pesapal_ipn'),
+    path('buyer-signup/', views.BuyerSignupView.as_view(), name='buyer_signup'),
+    path('buyer-dashboard/', views.buyer_dashboard, name='buyer_dashboard'),
     
 ]
 

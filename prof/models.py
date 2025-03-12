@@ -1,3 +1,4 @@
+# prof/models.py
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.core.mail import send_mail
@@ -40,7 +41,7 @@ class Order(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE, related_name='orders')
     transaction_id = models.CharField(max_length=100, unique=True)
-    merchant_reference = models.CharField(max_length=100, unique=True, blank=True, null=True)  # New field
+    merchant_reference = models.CharField(max_length=100, unique=True, blank=True, null=True)
     buyer_name = models.CharField(max_length=100)
     buyer_email = models.EmailField()
     buyer_phone = models.CharField(max_length=15, blank=True, null=True)
@@ -50,7 +51,7 @@ class Order(models.Model):
     is_completed = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        if self.is_completed and not self.pk:  # Only send emails on creation of completed order
+        if self.is_completed and not self.pk:
             send_mail(
                 subject=f"KibraConnect: Your Order for {self.artwork.title}",
                 message=f"Dear {self.buyer_name},\n\nThank you for your purchase of '{self.artwork.title}' for KES {self.amount}. Your transaction ID is {self.transaction_id}.\n\nBest regards,\nKibraConnect Team",

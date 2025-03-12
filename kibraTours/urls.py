@@ -10,6 +10,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('prof/', include('prof.urls', namespace='prof')),  # Maps /prof/ to prof app
     path('', include('home.urls')),  # Keep home app untouched
+    path('destinations/', include('tours.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     

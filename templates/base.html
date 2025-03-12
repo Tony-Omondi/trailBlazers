@@ -41,39 +41,32 @@
     <!-- Spinner End -->
 
     <!-- Topbar Start -->
-    <div class="container-fluid topbar bg-light px-3 px-md-5">
-        <div class="row gx-0 align-items-center">
-            <div class="col-12 col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                <div class="d-flex flex-column flex-lg-row flex-wrap justify-content-center justify-content-lg-start">
-                    <a href="#" class="text-muted small me-0 me-lg-4 mb-2 mb-lg-0"><i class="fas fa-map-marker-alt text-primary me-2" aria-hidden="true"></i>Explore Destinations</a>
-                    <a href="tel:+01234567890" class="text-muted small me-0 me-lg-4 mb-2 mb-lg-0"><i class="fas fa-phone-alt text-primary me-2" aria-hidden="true"></i>+01234567890</a>
-                    <a href="mailto:travel@kibraconnect.com" class="text-muted small me-0 mb-2 mb-lg-0"><i class="fas fa-envelope text-primary me-2" aria-hidden="true"></i>travel@kibraconnect.com</a>
-                </div>
-            </div>
-            <div class="col-12 col-lg-4 text-center text-lg-end">
-                <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-end align-items-center" style="height: 45px;">
-                    {% if request.user.is_authenticated %}
-                        <div class="dropdown">
-                            <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><small><i class="fa fa-suitcase text-primary me-2"></i> My Account</small></a>
-                            <div class="dropdown-menu rounded">
-                                {% if is_artist %}
-                                    <a href="{% url 'prof:artist_dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> Artist Dashboard</a>
-                                    <a href="{% url 'prof:upload_artwork' %}" class="dropdown-item"><i class="fas fa-upload me-2"></i> Upload Artwork</a>
-                                    <a href="{% url 'prof:edit_artist_profile' %}" class="dropdown-item"><i class="fas fa-edit me-2"></i> Edit Profile</a>
-                                {% endif %}
-                                <form action="{% url 'logout' %}" method="post" class="dropdown-item">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-link text-dark p-0"><i class="fas fa-power-off me-2"></i> Log Out</button>
-                                </form>
-                            </div>
-                        </div>
+<!-- base.html -->
+<div class="col-12 col-lg-4 text-center text-lg-end">
+    <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-end align-items-center" style="height: 45px;">
+        {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle text-dark" data-bs-toggle="dropdown"><small><i class="fa fa-suitcase text-primary me-2"></i> My Account</small></a>
+                <div class="dropdown-menu rounded">
+                    {% if is_artist %}
+                        <a href="{% url 'prof:artist_dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> Artist Dashboard</a>
+                        <a href="{% url 'prof:upload_artwork' %}" class="dropdown-item"><i class="fas fa-upload me-2"></i> Upload Artwork</a>
+                        <a href="{% url 'prof:edit_artist_profile' %}" class="dropdown-item"><i class="fas fa-edit me-2"></i> Edit Profile</a>
                     {% else %}
-                        <a href="{% url 'artist_auth' %}?mode=login"><small class="text-dark me-0 mb-2 mb-lg-0"><i class="fa fa-sign-in-alt text-primary me-2"></i>Log In as Artist</small></a>
+                        <a href="{% url 'prof:buyer_dashboard' %}" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> Buyer Dashboard</a>
                     {% endif %}
+                    <form action="{% url 'logout' %}" method="post" class="dropdown-item">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link text-dark p-0"><i class="fas fa-power-off me-2"></i> Log Out</button>
+                    </form>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <a href="{% url 'prof:artist_auth' %}?mode=login"><small class="text-dark me-0 mb-2 mb-lg-0"><i class="fa fa-sign-in-alt text-primary me-2"></i>Log In as Artist</small></a>
+            <a href="{% url 'prof:buyer_signup' %}"><small class="text-dark me-0 mb-2 mb-lg-0"><i class="fa fa-sign-in-alt text-primary me-2"></i>Sign Up as Buyer</small></a>
+        {% endif %}
     </div>
+</div>
     <!-- Topbar End -->
 
 
@@ -89,7 +82,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="{% url 'home' %}" class="nav-item nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
-                    <a href="{% url 'destinations' %}" class="nav-item nav-link">Destinations</a>
+                    <a href="{% url 'tours:destinations' %}" class="nav-item nav-link">Destinations</a>
                     <a href="#" class="nav-item nav-link">Tours</a>
                     <a href="{% url 'gallery' %}" class="nav-item nav-link">Gallery</a>
                     <a href="#" class="nav-item nav-link">Contact</a>

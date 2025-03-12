@@ -23,6 +23,9 @@ INSTALLED_APPS = [
     'home',
     'prof',
     'djmoney',
+    'mathfilters',
+    'tours'
+
 
 ]
 

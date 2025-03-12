@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: 'Roboto', sans-serif;">
+    <!-- Gallery Header -->
+    <h2 style="font-size: 2.5rem; color: #4caf50; margin-bottom: 20px; text-align: center; font-family: 'Pacifico', cursive; font-weight: normal;">🎨 Artwork Gallery</h2>
+
+    <!-- Login/Signup Prompt -->
+    {% if not user.is_authenticated %}
+        <p style="font-size: 1.2rem; color: #333; text-align: center; margin-bottom: 20px;">
+            Please <a href="{% url 'prof:buyer_auth' %}?mode=login" style="color: #4caf50; text-decoration: none; font-weight: bold;">log in</a> or 
+            <a href="{% url 'prof:buyer_auth' %}?mode=signup" style="color: #4caf50; text-decoration: none; font-weight: bold;">sign up</a> to purchase artwork.
+        </p>
+    {% endif %}
+
+    <!-- Artwork Gallery -->
+    <div class="gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        {% for artwork in artworks %}
+            <div class="artwork" style="background: #ffffff; border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+                <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                <h3 style="font-size: 1.5rem; color: #4caf50; margin-bottom: 10px;">{{ artwork.title }}</h3>
+                <p style="font-size: 1rem; color: #333; margin-bottom: 10px;">{{ artwork.description }}</p>
+                <p style="font-size: 1.2rem; color: #4caf50; font-weight: bold; margin-bottom: 10px;">💰 Price: KES {{ artwork.price }}</p>
+                <a href="{% url 'prof:buy_artwork' artwork.id %}" class="btn btn-primary" style="background: #4caf50; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 25px; color: white; text-decoration: none; transition: background-color 0.3s ease;">🛒 Buy Now</a>
+            </div>
+        {% empty %}
+            <p style="font-size: 1.2rem; color: #333; text-align: center; margin: 20px 0;">No artwork available. 🎨</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Custom CSS -->
+<style>
+    /* Button Hover Effect */
+    .btn-primary:hover {
+        background-color: #388e3c !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 2rem !important;
+        }
+        .gallery {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+{% endblock %}

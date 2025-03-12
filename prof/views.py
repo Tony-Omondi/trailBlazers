@@ -9,6 +9,8 @@ from allauth.account.utils import get_user_model
 from .models import ArtistProfile, Artwork, Order
 from .forms import ArtistProfileForm, ArtworkForm, OrderForm
 import logging
+from django.contrib.auth.models import Group
+from allauth.account.views import SignupView
 
 logger = logging.getLogger(__name__)
 
@@ -269,3 +271,26 @@ def pesapal_ipn(request):
             return JsonResponse({"status": "success"})
         return JsonResponse({"status": "order not found"}, status=404)
     return JsonResponse({"status": "invalid request"}, status=400)
+
+
+class BuyerSignupView(SignupView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        buyer_group, created = Group.objects.get_or_create(name='Buyer')
+        self.user.groups.add(buyer_group)
+        return response
+    
+@login_required
+def buyer_dashboard(request):
+    purchased_artworks = Order.objects.filter(buyer=request.user, is_completed=True).select_related('artwork')
+    return render(request, 'prof/buyer_dashboard.html', {'purchased_artworks': purchased_artworks})
+
+
+@login_required
+def role_based_redirect(request):
+    if request.user.groups.filter(name="Artist").exists():
+        return redirect("artist_dashboard")  # Redirect to artist dashboard
+    elif request.user.groups.filter(name="Buyer").exists():
+        return redirect("buyer_dashboard")  # Redirect to buyer dashboard
+    else:
+        return redirect("home") 

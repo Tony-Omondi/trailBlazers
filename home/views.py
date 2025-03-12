@@ -142,13 +142,13 @@ def about_us(request):
         'is_normal_user': is_normal_user(request.user),
     })
 
-def destinations(request):
-    destinations = Destination.objects.all()
-    return render(request, 'home/destinations.html', {'destinations': destinations})
+# def destinations(request):
+#     destinations = Destination.objects.all()
+#     return render(request, 'home/destinations.html', {'destinations': destinations})
 
-def destination_detail(request, destination_id):
-    destination = get_object_or_404(Destination, id=destination_id)
-    return render(request, 'home/destination_detail.html', {'destination': destination})
+# def destination_detail(request, destination_id):
+#     destination = get_object_or_404(Destination, id=destination_id)
+#     return render(request, 'home/destination_detail.html', {'destination': destination})
 
 def tours(request):
     return render(request, 'home/tours.html')
