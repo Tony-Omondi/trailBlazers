@@ -8,7 +8,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ("is_completed", "created_at")
 
 
-# OR with customization using ModelAdmin
 @admin.register(Artwork)
 class ArtworkAdmin(admin.ModelAdmin):
     # Fields to display in the list view
