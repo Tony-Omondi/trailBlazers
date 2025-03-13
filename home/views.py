@@ -7,6 +7,7 @@ from prof.models import ArtistProfile, Artwork
 from home.models import RegularUserProfile
 from home.models import Destination  # Ensure this import is included
 import logging
+from tours.models import Guide
 
 logger = logging.getLogger(__name__)
 
@@ -17,12 +18,16 @@ def is_normal_user(user):
     return user.is_authenticated and user.groups.filter(name="Normal User").exists()
 
 def home(request):
+    # Fetch all guides from the database
+    guides = Guide.objects.all()
+    
+    # Existing context data
     context = {
         'is_artist': is_artist(request.user),
         'is_normal_user': is_normal_user(request.user),
-        'latest_artworks': Artwork.objects.all().order_by('-created_at')[:3]  # Fetch latest 3 artworks
+        'latest_artworks': Artwork.objects.all().order_by('-created_at')[:3],  # Fetch latest 3 artworks
+        'guides': guides,  # Add guides to the context
     }
-    return render(request, 'home/index.html', context)  # Pass a single merged dictionary
 
 
 def role_selection(request):

@@ -510,74 +510,33 @@
             <p class="mb-0">Our local experts are passionate about sharing Kibera’s stories with the world.</p>
         </div>
         <div class="row g-4">
+            {% for guide in guides %}
             <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
                 <div class="team-item">
                     <div class="team-img">
-                        <img src="{% static 'img/guide-1.jpg' %}" class="img-fluid" alt="Guide 1">
+                        <img src="{{ guide.profile_picture.url }}" class="img-fluid" alt="{{ guide.full_name }}">
                     </div>
                     <div class="team-title">
-                        <h4 class="mb-0">James Otieno</h4>
-                        <p class="mb-0">Lead Guide</p>
+                        <h4 class="mb-0">{{ guide.full_name }}</h4>
+                        <p class="mb-0">{{ guide.bio }}</p>
                     </div>
                     <div class="team-icon">
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
+                        {% if guide.facebook_url %}
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="{{ guide.facebook_url }}"><i class="fab fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if guide.twitter_url %}
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="{{ guide.twitter_url }}"><i class="fab fa-twitter"></i></a>
+                        {% endif %}
+                        {% if guide.linkedin_url %}
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="{{ guide.linkedin_url }}"><i class="fab fa-linkedin-in"></i></a>
+                        {% endif %}
+                        {% if guide.instagram_url %}
+                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="{{ guide.instagram_url }}"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{% static 'img/guide-2.jpg' %}" class="img-fluid" alt="Guide 2">
-                    </div>
-                    <div class="team-title">
-                        <h4 class="mb-0">Amina Hassan</h4>
-                        <p class="mb-0">Cultural Expert</p>
-                    </div>
-                    <div class="team-icon">
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{% static 'img/guide-3.jpg' %}" class="img-fluid" alt="Guide 3">
-                    </div>
-                    <div class="team-title">
-                        <h4 class="mb-0">Peter Mwangi</h4>
-                        <p class="mb-0">Art Guide</p>
-                    </div>
-                    <div class="team-icon">
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{% static 'img/guide-4.jpg' %}" class="img-fluid" alt="Guide 4">
-                    </div>
-                    <div class="team-title">
-                        <h4 class="mb-0">Grace Wambui</h4>
-                        <p class="mb-0">Community Liaison</p>
-                    </div>
-                    <div class="team-icon">
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-3" href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-primary btn-sm-square rounded-circle me-0" href=""><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
