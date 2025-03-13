@@ -28,6 +28,9 @@ def home(request):
         'latest_artworks': Artwork.objects.all().order_by('-created_at')[:3],  # Fetch latest 3 artworks
         'guides': guides,  # Add guides to the context
     }
+    
+    # Render the index.html template with the merged context
+    return render(request, 'home/index.html', context)
 
 
 def role_selection(request):
