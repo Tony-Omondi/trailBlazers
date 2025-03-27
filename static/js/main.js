@@ -11,7 +11,6 @@
     };
     spinner(0);
     
-    
     // Initiate the wowjs
     new WOW().init();
 
@@ -24,7 +23,6 @@
         }
     });
 
-
     // Hero Header carousel
     $(".header-carousel").owlCarousel({
         animateOut: 'fadeOut',
@@ -33,15 +31,10 @@
         stagePadding: 0,
         autoplay: true,
         smartSpeed: 500,
-        dots: true,
+        dots: true,  // Keep dots for navigation
         loop: true,
-        nav : true,
-        navText : [
-            '<i class="bi bi-arrow-left"></i>',
-            '<i class="bi bi-arrow-right"></i>'
-        ],
+        nav: false   // Remove navigation arrows
     });
-
 
     // attractions carousel
     $(".blog-carousel").owlCarousel({
@@ -51,31 +44,20 @@
         dots: false,
         loop: true,
         margin: 25,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="fa fa-angle-right"></i>',
             '<i class="fa fa-angle-left"></i>'
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:2
-            },
-            1200:{
-                items:3
-            }
+            0: { items: 1 },
+            576: { items: 1 },
+            768: { items: 2 },
+            992: { items: 2 },
+            1200: { items: 3 }
         }
     });
-
 
     // testimonial carousel
     $(".testimonial-carousel").owlCarousel({
@@ -85,31 +67,20 @@
         dots: true,
         loop: true,
         margin: 25,
-        nav : true,
-        navText : [
+        nav: true,
+        navText: [
             '<i class="fa fa-angle-right"></i>',
             '<i class="fa fa-angle-left"></i>'
         ],
         responsiveClass: true,
         responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            },
-            992:{
-                items:2
-            },
-            1200:{
-                items:3
-            }
+            0: { items: 1 },
+            576: { items: 1 },
+            768: { items: 2 },
+            992: { items: 2 },
+            1200: { items: 3 }
         }
     });
-
 
     // Facts counter
     $('[data-toggle="counter-up"]').counterUp({
@@ -117,20 +88,17 @@
         time: 2000
     });
 
-
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
     });
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
     });
 
-
 })(jQuery);
-
